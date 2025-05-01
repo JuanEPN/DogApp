@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2E2E2E" >
+    android:background="#212931" >
 
     <!-- Imagen del perro como se muestra en la historia de usuario -->
 
@@ -54,5 +54,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="48dp"
         app:layout_constraintVertical_bias="0.5"/>
+
+    <Button
+        android:id="@+id/btnIrAHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ir al Home"
+        android:backgroundTint="#F05861"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/fingerprintAnimation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

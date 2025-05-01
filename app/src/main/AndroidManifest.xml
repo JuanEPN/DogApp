@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DogApp"
         tools:targetApi="31">
+        <activity android:name=".view.Ui.Home.HomeActivity" />
 
         <!-- Login es nuestra pantalla de inicio, aca arranca la app -->
         <activity

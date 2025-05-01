@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- Foto Mascota -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgMascota"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#F05861"
+            android:src="@drawable/ic_dog"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Nombre de la mascota -->
+        <TextView
+            android:id="@+id/tvNombreMascota"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Firulais"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:layout_marginStart="12dp"
+            app:layout_constraintTop_toTopOf="@id/imgMascota"
+            app:layout_constraintStart_toEndOf="@id/imgMascota"
+            app:layout_constraintEnd_toStartOf="@id/tvTurno" />
+
+        <!-- Síntoma -->
+        <TextView
+            android:id="@+id/tvSintoma"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="No come desde ayer"
+            android:textSize="14sp"
+            android:textColor="#757575"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/tvNombreMascota"
+            app:layout_constraintStart_toStartOf="@id/tvNombreMascota"
+            app:layout_constraintEnd_toStartOf="@id/tvTurno" />
+
+        <!-- Turno (ID) -->
+        <TextView
+            android:id="@+id/tvTurno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#1"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="8dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
