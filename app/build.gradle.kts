@@ -100,5 +100,8 @@ dependencies {
 
     implementation("androidx.biometric:biometric:1.2.0-alpha04")
 
+    // Foto en circulo
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
 }
 
