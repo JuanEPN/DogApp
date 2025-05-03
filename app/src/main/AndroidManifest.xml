@@ -12,7 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DogApp"
         tools:targetApi="31">
+
+        <!-- Pantalla principal después del login -->
         <activity android:name=".view.Ui.Home.HomeActivity" />
+
+        <!-- Pantalla para crear nuevas citas -->
+        <activity android:name=".view.Ui.Newappointment.NewAppointmentActivity" />
 
         <!-- Login es nuestra pantalla de inicio, aca arranca la app -->
         <activity

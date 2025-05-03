@@ -36,14 +36,6 @@ class LoginActivity : AppCompatActivity() { // Declaramos una nueva actividad qu
 
         fingerprintAninamtion = findViewById(R.id.fingerprintAnimation)
 
-        // botón temporarl
-        val btnIrAHome = findViewById<Button>(R.id.btnIrAHome)
-        btnIrAHome.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-            finish() // Opcional, para cerrar la pantalla de login
-        }
-
         fingerprintAninamtion.setOnClickListener {
             mostrarDialogoBiometrico()
         }
