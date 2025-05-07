@@ -5,18 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2E2E2E" >
+    android:background="#212931" >
 
     <!-- Imagen del perro como se muestra en la historia de usuario -->
 
     <ImageView
         android:id="@+id/imgDog"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/dog_head"
+        android:src="@drawable/lg_dog"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
@@ -31,7 +31,7 @@
         android:layout_centerHorizontal="true"
         android:text="DogApp"
         android:textColor="@android:color/white"
-        android:textSize="50sp"
+        android:textSize="60sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="163dp"
         tools:layout_editor_absoluteY="150dp"
@@ -44,15 +44,15 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/fingerprintAnimation"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         app:lottie_rawRes="@raw/fingerprint"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="70dp"
         app:layout_constraintVertical_bias="0.5"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

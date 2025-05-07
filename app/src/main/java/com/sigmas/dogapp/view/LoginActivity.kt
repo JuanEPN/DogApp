@@ -1,10 +1,11 @@
 package com.sigmas.dogapp.view
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
-import com.sigmas.dogapp.view.HomeActivity //Siguiente actividad a ir
+import com.sigmas.dogapp.view.Ui.Home.HomeActivity
 import com.sigmas.dogapp.R
 import androidx.biometric.BiometricPrompt
 import androidx.biometric.BiometricManager
@@ -17,16 +18,27 @@ class LoginActivity : AppCompatActivity() { // Declaramos una nueva actividad qu
     private lateinit var fingerprintAninamtion: LottieAnimationView // Aca creamos una variable privada que nos ayuda a acceder a la animacion de la huella en el XML, ademas que se
     // Inicializará después con lateinit
 
-    override fun onCreate(savedInstanceState : Bundle?) { //Este metodo que hicimos es el encargado de cargar el XML de esta actividad en este caso Login
+    //override fun onCreate(savedInstanceState : Bundle?) { //Este metodo que hicimos es el encargado de cargar el XML de esta actividad en este caso Login
+        //super.onCreate(savedInstanceState)
+        //setContentView(R.layout.activity_login)
+
+        //fingerprintAninamtion = findViewById(R.id.fingerprintAnimation) //Aca conectamos la clase con el archivo XML buscandolo por su id
+
+        //fingerprintAninamtion.setOnClickListener{ //Ponemos un metodo que este pendiente si se da click a la animacion para mostrar el dialogo biometrico osea su funcion
+            //mostrarDialogoBiometrico()
+        //}
+
+    //}
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        fingerprintAninamtion = findViewById(R.id.fingerprintAnimation) //Aca conectamos la clase con el archivo XML buscandolo por su id
+        fingerprintAninamtion = findViewById(R.id.fingerprintAnimation)
 
-        fingerprintAninamtion.setOnClickListener{ //Ponemos un metodo que este pendiente si se da click a la animacion para mostrar el dialogo biometrico osea su funcion
+        fingerprintAninamtion.setOnClickListener {
             mostrarDialogoBiometrico()
         }
-
     }
 
     private lateinit var biometricPrompt: BiometricPrompt
@@ -65,4 +77,5 @@ class LoginActivity : AppCompatActivity() { // Declaramos una nueva actividad qu
         startActivity(intent)
         finish()
     }
+
 }
