@@ -16,19 +16,6 @@ import androidx.core.content.ContextCompat
 class LoginActivity : AppCompatActivity() { // Declaramos una nueva actividad que sera la del Login. AppCompatActivity es una clase que nos da mayor compatibilidad con versiones anteriores
 
     private lateinit var fingerprintAninamtion: LottieAnimationView // Aca creamos una variable privada que nos ayuda a acceder a la animacion de la huella en el XML, ademas que se
-    // Inicializará después con lateinit
-
-    //override fun onCreate(savedInstanceState : Bundle?) { //Este metodo que hicimos es el encargado de cargar el XML de esta actividad en este caso Login
-        //super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_login)
-
-        //fingerprintAninamtion = findViewById(R.id.fingerprintAnimation) //Aca conectamos la clase con el archivo XML buscandolo por su id
-
-        //fingerprintAninamtion.setOnClickListener{ //Ponemos un metodo que este pendiente si se da click a la animacion para mostrar el dialogo biometrico osea su funcion
-            //mostrarDialogoBiometrico()
-        //}
-
-    //}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
