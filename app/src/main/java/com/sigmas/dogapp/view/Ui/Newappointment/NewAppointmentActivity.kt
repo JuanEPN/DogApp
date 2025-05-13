@@ -1,5 +1,6 @@
 package com.sigmas.dogapp.view.Ui.Newappointment
 
+import android.R
 import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
 import android.os.Bundle
@@ -13,9 +14,13 @@ import androidx.lifecycle.lifecycleScope
 import com.sigmas.dogapp.databinding.ActivityNewAppointmentBinding
 import com.sigmas.dogapp.view.Data.AppDatabase
 import com.sigmas.dogapp.view.Data.Model.Cita
+import com.sigmas.dogapp.view.Data.Model.RazasResponse
 import com.sigmas.dogapp.view.Ui.Repository.CitaRepository
 import com.sigmas.dogapp.view.Ui.Home.HomeActivity
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class NewAppointmentActivity : AppCompatActivity() {
 
@@ -33,6 +38,7 @@ class NewAppointmentActivity : AppCompatActivity() {
         citaRepository = CitaRepository(database.citaDao())
 
         configurarDropdown()
+        cargarRazasDesdeApi()
         configurarInsets()
         configurarValidacion()
 
@@ -150,5 +156,47 @@ class NewAppointmentActivity : AppCompatActivity() {
                 binding.spinnerSintomas.text?.isNotEmpty() == true
 
         binding.btnGuardar.isEnabled = camposCompletos
+    }
+
+    private fun cargarRazasDesdeApi() {
+        val apiService = com.sigmas.dogapp.view.Network.RetrofitRazas
+            .instance.create(com.sigmas.dogapp.view.Network.DogApiService::class.java)
+
+        apiService.obtenerTodasLasRazas().enqueue(object : retrofit2.Callback<com.sigmas.dogapp.view.Data.Model.RazasResponse> {
+            override fun onResponse(
+                call: Call<RazasResponse>,
+                response: Response<RazasResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val razasMap = response.body()?.message ?: emptyMap()
+
+                    val listaRazas = razasMap.flatMap { (raza, subrazas) ->
+                        if (subrazas.isEmpty()) listOf(raza)
+                        else subrazas.map { sub -> "$raza $sub" }
+                    }.map { it.replaceFirstChar(Char::uppercaseChar) }.sorted()
+
+                    val adapter = ArrayAdapter(
+                        this@NewAppointmentActivity,
+                        R.layout.simple_dropdown_item_1line,
+                        listaRazas
+                    )
+
+                    binding.etRaza.setAdapter(adapter)
+
+                    binding.etRaza.setOnClickListener {
+                        binding.etRaza.showDropDown()
+                    }
+                } else {
+                    Toast.makeText(this@NewAppointmentActivity, "Error al cargar razas", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(
+                call: Call<com.sigmas.dogapp.view.Data.Model.RazasResponse>,
+                t: Throwable
+            ) {
+                Toast.makeText(this@NewAppointmentActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

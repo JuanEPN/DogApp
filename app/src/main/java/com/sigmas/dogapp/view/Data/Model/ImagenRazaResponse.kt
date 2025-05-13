@@ -4,3 +4,4 @@ data class ImagenRazaResponse(
     val message: String,
     val status: String
 )
+
