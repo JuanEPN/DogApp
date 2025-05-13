@@ -3,11 +3,18 @@ package com.sigmas.dogapp.view.Ui.Home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.sigmas.dogapp.R
 import com.sigmas.dogapp.view.Data.Model.Cita
+import com.sigmas.dogapp.view.Data.Model.ImagenRazaResponse
+import com.sigmas.dogapp.view.Network.DogApiService
+import com.sigmas.dogapp.view.Network.RetrofitRazas
 import de.hdodenhof.circleimageview.CircleImageView
-import android.widget.TextView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeAdapter(
     private var citas: List<Cita>,
@@ -32,16 +39,52 @@ class HomeAdapter(
         private val tvTurno: TextView = itemView.findViewById(R.id.tvTurno)
 
         fun bind(cita: Cita) {
-            // Aquí llenamos los datos
             tvNombreMascota.text = cita.nombreMascota
-            tvSintoma.text = cita.sintoma
-            tvTurno.text = "#${cita.turno}"
+            tvSintoma.text = cita.sintomas ?: "No especificado"
+            tvTurno.text = "#${cita.id}"
 
-            // Opcionalmente cargar imagen (después usando Glide o Picasso)
-            imgMascota.setImageResource(R.drawable.lg_dog)
+            val razaApi = mapearRazaParaApi(cita.raza)
+
+            val apiService = RetrofitRazas.instance.create(DogApiService::class.java)
+            val call = apiService.obtenerImagenPorRaza(razaApi)
+
+            call.enqueue(object : Callback<ImagenRazaResponse> {
+                override fun onResponse(
+                    call: Call<ImagenRazaResponse>,
+                    response: Response<ImagenRazaResponse>
+                ) {
+                    if (response.isSuccessful && response.body()?.status == "success") {
+                        val url = response.body()?.message
+                        Glide.with(itemView.context)
+                            .load(url)
+                            .placeholder(R.drawable.ic_dog)
+                            .error(R.drawable.ic_dog)
+                            .into(imgMascota)
+                    } else {
+                        Glide.with(itemView.context).load(R.drawable.ic_dog).into(imgMascota)
+                    }
+                }
+
+                override fun onFailure(call: Call<ImagenRazaResponse>, t: Throwable) {
+                    Glide.with(itemView.context).load(R.drawable.ic_dog).into(imgMascota)
+                }
+            })
 
             itemView.setOnClickListener {
                 onItemClick(cita)
+            }
+        }
+
+        private fun mapearRazaParaApi(raza: String): String {
+            return when (raza.lowercase().trim()) {
+                "pastor", "pastor alemán", "pastor aleman" -> "germanshepherd"
+                "pitbull" -> "pitbull"
+                "labrador" -> "labrador"
+                "doberman" -> "doberman"
+                "pug" -> "pug"
+                "husky" -> "husky"
+                "criollo", "mestizo", "sin raza" -> "mix"
+                else -> "dog"
             }
         }
     }
