@@ -157,7 +157,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginHorizontal="16dp"
-        android:hint="@string/nombre_propietario"
+        android:hint="@string/telefono"
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="#800080"
         app:boxStrokeWidth="1dp"
