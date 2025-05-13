@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import com.sigmas.dogapp.R
 import com.sigmas.dogapp.databinding.ActivityNewAppointmentBinding
 import com.sigmas.dogapp.view.Data.AppDatabase
 import com.sigmas.dogapp.view.Data.Model.Cita
@@ -53,16 +52,28 @@ class NewAppointmentActivity : AppCompatActivity() {
     }
 
     private fun configurarDropdown() {
-        val adapter = ArrayAdapter.createFromResource(
-            this,
-            R.array.SymptomList,
-            android.R.layout.simple_dropdown_item_1line
+        val sintomasList = listOf(
+            "Síntomas",  // valor inicial por defecto
+            "Solo duerme",
+            "No come",
+            "Fractura extremidad",
+            "Tiene pulgas",
+            "Tiene garrapatas",
+            "Bota demasiado pelo"
         )
+
+        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, sintomasList)
         binding.spinnerSintomas.setAdapter(adapter)
+
+        // Valor por defecto mostrado
+        binding.spinnerSintomas.setText("Síntomas", false)
+
+        // Mostrar lista al tocar
         binding.spinnerSintomas.setOnClickListener {
             binding.spinnerSintomas.showDropDown()
         }
     }
+
 
     private fun configurarInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->

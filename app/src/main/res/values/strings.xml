@@ -10,15 +10,14 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="sintomas">"Sintomas"</string>
-
-
-
-    <string-array name="SymptomList">
-        <item>Fiebre</item>
-        <item>No come</item>
-        <item>Vomita</item>
-        <item>Tos</item>
-        <item>Dolor</item>
-    </string-array>
+    <string name="editar_cita">Editar Cita</string>
+    <string name="desc_btn_back">Botón para volver</string>
+    <string name="nombre_mascota">Nombre de la Mascota</string>
+    <string name="raza">Raza</string>
+    <string name="nombre_propietario">Nombre del Propietario</string>
+    <string name="telefono">Teléfono</string>
+    <string name="guardar_cita">Guardar Cita</string>
+    <string name="bot_n_volver">Botón volver</string>
+    <string name="nueva_cita">Nueva Cita</string>
 
 </resources>
