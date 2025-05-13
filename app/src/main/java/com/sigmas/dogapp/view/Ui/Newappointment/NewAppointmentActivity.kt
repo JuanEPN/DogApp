@@ -1,6 +1,7 @@
 package com.sigmas.dogapp.view.Ui.Newappointment
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatDelegate
 import android.os.Bundle
 import android.text.Editable
 import android.widget.ArrayAdapter
@@ -23,6 +24,7 @@ class NewAppointmentActivity : AppCompatActivity() {
     private lateinit var citaRepository: CitaRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) // <--- ESTA LÍNEA
         super.onCreate(savedInstanceState)
         binding = ActivityNewAppointmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
