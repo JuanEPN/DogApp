@@ -22,7 +22,6 @@
             app:civ_border_color="#F05861"
             android:src="@drawable/ic_dog"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <!-- Nombre de la mascota -->
@@ -39,6 +38,19 @@
             app:layout_constraintStart_toEndOf="@id/imgMascota"
             app:layout_constraintEnd_toStartOf="@id/tvTurno" />
 
+        <!-- Turno -->
+        <TextView
+            android:id="@+id/tvTurno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#1"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#F05861"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"/>
+
         <!-- Síntoma -->
         <TextView
             android:id="@+id/tvSintoma"
@@ -47,24 +59,11 @@
             android:text="No come desde ayer"
             android:textSize="14sp"
             android:textColor="#757575"
-            android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
+            android:layout_marginStart="12dp"
             app:layout_constraintTop_toBottomOf="@id/tvNombreMascota"
             app:layout_constraintStart_toStartOf="@id/tvNombreMascota"
-            app:layout_constraintEnd_toStartOf="@id/tvTurno" />
-
-        <!-- Turno (ID) -->
-        <TextView
-            android:id="@+id/tvTurno"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="#1"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="8dp" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
