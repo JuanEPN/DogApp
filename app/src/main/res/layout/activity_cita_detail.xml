@@ -4,14 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="@android:color/white">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:background="@android:color/white">
 
         <ImageView
             android:id="@+id/imgDetalleMascota"
@@ -66,5 +68,6 @@
             android:text="Volver" />
     </LinearLayout>
 </ScrollView>
+
 
 
