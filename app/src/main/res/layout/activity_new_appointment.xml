@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,15 +25,16 @@
             android:layout_marginTop="16dp"
             android:src="@drawable/ic_arrow_back"
             android:tint="#F05861"
-            android:contentDescription="Botón volver"
+            android:contentDescription="@string/bot_n_volver"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UseAppTint" />
 
         <TextView
             android:id="@+id/tvTitleNuevaCita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nueva Cita"
+            android:text="@string/nueva_cita"
             android:textSize="30sp"
             android:textColor="@android:color/white"
             android:textStyle="bold"
@@ -49,66 +51,73 @@
         android:id="@+id/etNombreMascota"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Nombre de la Mascota"
+        android:layout_marginTop="20dp"
+        android:hint="@string/nombre_mascota"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@id/headerLayout"
-        app:layout_constraintStart_toStartOf="parent"
+        app:boxBackgroundMode="filled"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        tools:ignore="Autofill,TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/etRaza"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Raza"
+        android:layout_marginTop="12dp"
+        android:hint="@string/raza"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/etNombreMascota"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etNombreMascota"
+        tools:ignore="Autofill,TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/etNombrePropietario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Nombre del Propietario"
+        android:layout_marginTop="12dp"
+        android:hint="@string/nombre_propietario"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@id/etRaza"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etRaza"
+        tools:ignore="Autofill,TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/etTelefono"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Teléfono"
+        android:layout_marginTop="12dp"
+        android:hint="@string/telefono"
         android:inputType="phone"
-        app:layout_constraintTop_toBottomOf="@id/etNombrePropietario"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etNombrePropietario"
+        tools:ignore="Autofill,TouchTargetSizeCheck" />
 
     <AutoCompleteTextView
         android:id="@+id/spinnerSintomas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/etTelefono"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="12dp"
-        android:hint="@string/sintomas"/>
+        android:hint="@string/sintomas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etTelefono"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/btnGuardar"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Guardar Cita"
+        android:layout_marginTop="20dp"
         android:backgroundTint="#F05861"
+        android:text="@string/guardar_cita"
         android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/spinnerSintomas"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerSintomas"
+        tools:ignore="TextContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
