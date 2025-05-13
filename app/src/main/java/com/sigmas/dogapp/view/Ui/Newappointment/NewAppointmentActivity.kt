@@ -43,8 +43,13 @@ class NewAppointmentActivity : AppCompatActivity() {
         configurarValidacion()
 
         binding.btnGuardar.setOnClickListener {
+            if (binding.spinnerSintomas.text.toString() == "Síntomas") {
+                Toast.makeText(this, "Selecciona un síntoma", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             guardarCita()
         }
+
 
         binding.btnBack.setOnClickListener {
             navegarAHome()
@@ -149,14 +154,23 @@ class NewAppointmentActivity : AppCompatActivity() {
     }
 
     private fun validarCamposObligatorios() {
-        val camposCompletos = binding.etNombreMascota.text?.isNotEmpty() == true &&
-                binding.etRaza.text?.isNotEmpty() == true &&
-                binding.etNombrePropietario.text?.isNotEmpty() == true &&
-                binding.etTelefono.text?.isNotEmpty() == true &&
-                binding.spinnerSintomas.text?.isNotEmpty() == true
+        val nombreMascota = binding.etNombreMascota.text?.isNotEmpty() == true
+        val raza = binding.etRaza.text?.isNotEmpty() == true
+        val nombrePropietario = binding.etNombrePropietario.text?.isNotEmpty() == true
+        val telefono = binding.etTelefono.text?.isNotEmpty() == true
+        val sintomas = binding.spinnerSintomas.text?.isNotEmpty() == true
 
-        binding.btnGuardar.isEnabled = camposCompletos
+        val camposValidos = nombreMascota && raza && nombrePropietario && telefono
+
+        binding.btnGuardar.isEnabled = camposValidos
+
+        // Color y estilo (opcional redundante si usas el selector)
+        binding.btnGuardar.setTextColor(
+            if (camposValidos) resources.getColor(android.R.color.white)
+            else resources.getColor(android.R.color.darker_gray)
+        )
     }
+
 
     private fun cargarRazasDesdeApi() {
         val apiService = com.sigmas.dogapp.view.Network.RetrofitRazas
