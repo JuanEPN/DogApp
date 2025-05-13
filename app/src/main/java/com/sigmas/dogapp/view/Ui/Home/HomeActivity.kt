@@ -13,6 +13,8 @@ import com.sigmas.dogapp.view.Ui.Newappointment.NewAppointmentActivity
 import com.sigmas.dogapp.view.Data.Model.Cita
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
+import com.sigmas.dogapp.view.Ui.CitaDetail.CitaDetailActivity
+
 
 class HomeActivity : AppCompatActivity() {
 
@@ -38,7 +40,9 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         homeAdapter = HomeAdapter(emptyList()) { cita ->
-            // Acción al hacer clic (opcional)
+            val intent = Intent(this, CitaDetailActivity::class.java)
+            intent.putExtra("id", cita.id)
+            startActivity(intent)
         }
         recyclerViewCitas.layoutManager = LinearLayoutManager(this)
         recyclerViewCitas.adapter = homeAdapter
