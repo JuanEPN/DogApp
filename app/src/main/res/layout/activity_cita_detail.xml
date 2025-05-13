@@ -5,15 +5,27 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:fillViewport="true"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:background="@android:color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="350dp"
+            android:layout_height="110dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_right"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/imgDetalleMascota"
@@ -21,45 +33,52 @@
             android:layout_height="200dp"
             android:layout_marginBottom="16dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_dog" />
+            android:src="@drawable/ic_dog"
+            />
 
         <TextView
             android:id="@+id/tvDetalleTurno"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Turno #"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+            android:textColor="#D23B69"
+            android:gravity="end"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvDetalleNombreMascota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nombre de la mascota"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:layout_marginBottom="8dp" />
 
         <TextView
             android:id="@+id/tvDetalleSintomas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Síntomas"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="16dp"
+            android:text="Síntomas" />
+
+        <View
+            android:layout_width="250dp"
+            android:layout_height="2dp"
+            android:background="#D23B69"
+            android:layout_marginBottom="12dp" />
 
         <TextView
             android:id="@+id/tvDetallePropietario"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Propietario"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:text="Propietario" />
 
         <TextView
             android:id="@+id/tvDetalleTelefono"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Teléfono"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:text="Teléfono" />
 
         <Button
             android:id="@+id/btnVolver"
