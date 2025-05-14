@@ -43,7 +43,7 @@ class HomeAdapter(
             tvSintoma.text = cita.sintomas ?: "No especificado"
             tvTurno.text = "#${cita.id}"
 
-            val razaApi = mapearRazaParaApi(cita.raza)
+            val razaApi = normalizarRazaParaApi(cita.raza)
 
             val apiService = RetrofitRazas.instance.create(DogApiService::class.java)
             val call = apiService.obtenerImagenPorRaza(razaApi)
@@ -75,17 +75,15 @@ class HomeAdapter(
             }
         }
 
-        private fun mapearRazaParaApi(raza: String): String {
-            return when (raza.lowercase().trim()) {
-                "pastor", "pastor alemán", "pastor aleman" -> "germanshepherd"
-                "pitbull" -> "pitbull"
-                "labrador" -> "labrador"
-                "doberman" -> "doberman"
-                "pug" -> "pug"
-                "husky" -> "husky"
-                "criollo", "mestizo", "sin raza" -> "mix"
-                else -> "dog"
-            }
+        private fun normalizarRazaParaApi(raza: String): String {
+            return raza.lowercase()
+                .replace("[áàäâ]".toRegex(), "a")
+                .replace("[éèëê]".toRegex(), "e")
+                .replace("[íìïî]".toRegex(), "i")
+                .replace("[óòöô]".toRegex(), "o")
+                .replace("[úùüû]".toRegex(), "u")
+                .replace("[^a-z/]".toRegex(), "")
+                .replace(" ", "")
         }
     }
 
