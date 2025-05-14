@@ -23,7 +23,7 @@
         <!-- Pantalla para crear nuevas citas -->
         <activity android:name=".view.Ui.Newappointment.NewAppointmentActivity" />
 
-        <!-- ✅ PANTALLA DE DETALLE DE CITAS -->
+        <!-- PANTALLA DE DETALLE DE CITAS -->
         <activity android:name=".view.Ui.CitaDetail.CitaDetailActivity" />
 
         <!-- Login  -->
