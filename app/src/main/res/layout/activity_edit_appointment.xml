@@ -13,36 +13,36 @@
         android:layout_width="0dp"
         android:layout_height="110dp"
         android:background="@drawable/rounded_right"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/btnBack"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:contentDescription="@string/desc_btn_back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="34dp"
+            android:contentDescription="@string/bot_n_volver"
             android:src="@drawable/ic_arrow_back"
+            android:tint="#F05861"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:tint="#F05861"
-            tools:ignore="ImageContrastCheck,UseAppTint" />
+            tools:ignore="UseAppTint" />
 
         <TextView
             android:id="@+id/TitleEditarCita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/editar_cita"
-            android:textSize="30sp"
             android:textColor="@android:color/white"
+            android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/btnBack"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.4"/>
+            app:layout_constraintHorizontal_bias="0.22"
+            app:layout_constraintStart_toEndOf="@id/btnBack"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Campos del formulario -->
@@ -190,7 +190,7 @@
         android:id="@+id/btnGuardar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="176dp"
         android:layout_marginHorizontal="100dp"
         android:text="@string/editar_cita"
         android:background="@drawable/btn_guardar_selector"
