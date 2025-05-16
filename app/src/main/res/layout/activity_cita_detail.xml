@@ -25,6 +25,19 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/btnVolver"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_arrow_back"
+                android:contentDescription="@string/bot_n_volver"
+                app:tint="#F05861"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
@@ -81,10 +94,15 @@
             android:text="Teléfono" />
 
         <Button
-            android:id="@+id/btnVolver"
+            android:id="@+id/btnEditar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Volver" />
+            android:layout_marginTop="24dp"
+            android:text="Editar"
+            android:drawableStart="@drawable/ic_edit"
+            android:padding="12dp"
+            />
+
     </LinearLayout>
 </ScrollView>
 

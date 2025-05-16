@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.sigmas.dogapp.R
 import com.sigmas.dogapp.databinding.ActivityCitaDetailBinding
 import com.sigmas.dogapp.view.Data.AppDatabase
+import com.sigmas.dogapp.view.Data.Model.Cita
 import com.sigmas.dogapp.view.Data.Model.ImagenRazaResponse
 import com.sigmas.dogapp.view.Network.DogApiService
 import com.sigmas.dogapp.view.Network.RetrofitRazas
@@ -24,6 +25,7 @@ class CitaDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCitaDetailBinding
     private lateinit var citaRepository: CitaRepository
+    private var citaActual: Cita? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,13 +33,21 @@ class CitaDetailActivity : AppCompatActivity() {
         binding = ActivityCitaDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        binding.btnEditar.setOnClickListener {
+            citaActual?.let { cita ->
+                val intent = Intent(this, EditCitaActivity::class.java)
+                intent.putExtra("cita", cita) // envías toda la cita
+                startActivity(intent)
+            }
+        }
+
         val idCita = intent.getIntExtra("id", -1)
         if (idCita == -1) {
             Toast.makeText(this, "Error: ID de cita inválido", Toast.LENGTH_SHORT).show()
             finish()
             return
         }
-
         citaRepository = CitaRepository(AppDatabase.getDatabase(applicationContext).citaDao())
 
         binding.btnVolver.setOnClickListener {
@@ -52,12 +62,12 @@ class CitaDetailActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val cita = citaRepository.obtenerPorId(idCita)
             if (cita != null) {
+                citaActual = cita
                 binding.tvDetalleTurno.text = "#${cita.id}"
                 binding.tvDetalleNombreMascota.text = cita.nombreMascota
                 binding.tvDetalleSintomas.text = "Síntomas: ${cita.sintomas ?: "No especificado"}"
                 binding.tvDetallePropietario.text = "Propietario: ${cita.nombrePropietario}"
                 binding.tvDetalleTelefono.text = "Teléfono: ${cita.telefono}"
-
                 cargarImagenDesdeApi(mapearRaza(cita.raza))
             } else {
                 Toast.makeText(this@CitaDetailActivity, "Cita no encontrada", Toast.LENGTH_SHORT).show()
@@ -65,6 +75,7 @@ class CitaDetailActivity : AppCompatActivity() {
             }
         }
     }
+
 
     private fun cargarImagenDesdeApi(razaApi: String) {
         val apiService = RetrofitRazas.instance.create(DogApiService::class.java)
