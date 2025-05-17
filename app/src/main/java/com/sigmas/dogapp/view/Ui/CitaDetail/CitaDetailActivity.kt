@@ -68,7 +68,7 @@ class CitaDetailActivity : AppCompatActivity() {
                 binding.tvDetalleSintomas.text = "Síntomas: ${cita.sintomas ?: "No especificado"}"
                 binding.tvDetallePropietario.text = "Propietario: ${cita.nombrePropietario}"
                 binding.tvDetalleTelefono.text = "Teléfono: ${cita.telefono}"
-                cargarImagenDesdeApi(mapearRaza(cita.raza))
+                cargarImagenDesdeApi(normalizarRazaParaApi(cita.raza))
             } else {
                 Toast.makeText(this@CitaDetailActivity, "Cita no encontrada", Toast.LENGTH_SHORT).show()
                 finish()
@@ -105,17 +105,15 @@ class CitaDetailActivity : AppCompatActivity() {
         })
     }
 
-    private fun mapearRaza(raza: String): String {
-        return when (raza.lowercase().trim()) {
-            "pastor", "pastor alemán", "pastor aleman" -> "germanshepherd"
-            "pitbull" -> "pitbull"
-            "labrador" -> "labrador"
-            "doberman" -> "doberman"
-            "pug" -> "pug"
-            "husky" -> "husky"
-            "criollo", "mestizo", "sin raza" -> "mix"
-            else -> "dog"
-        }
+    private fun normalizarRazaParaApi(raza: String): String {
+        return raza.lowercase()
+            .replace("[áàäâ]".toRegex(), "a")
+            .replace("[éèëê]".toRegex(), "e")
+            .replace("[íìïî]".toRegex(), "i")
+            .replace("[óòöô]".toRegex(), "o")
+            .replace("[úùüû]".toRegex(), "u")
+            .replace("[^a-z/]".toRegex(), "")
+            .replace(" ", "")
     }
 
     private fun mostrarImagenPorDefecto() {
