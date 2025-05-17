@@ -1,8 +1,10 @@
 package com.sigmas.dogapp.view.Ui.CitaDetail
 
+import android.R
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -10,6 +12,12 @@ import com.sigmas.dogapp.databinding.ActivityEditAppointmentBinding
 import com.sigmas.dogapp.view.Data.AppDatabase
 import com.sigmas.dogapp.view.Data.Model.Cita
 import com.sigmas.dogapp.view.Ui.Repository.CitaRepository
+import com.sigmas.dogapp.view.Data.Model.RazasResponse
+import com.sigmas.dogapp.view.Network.DogApiService
+import com.sigmas.dogapp.view.Network.RetrofitRazas
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import kotlinx.coroutines.launch
 
 class EditCitaActivity : AppCompatActivity() {
@@ -29,6 +37,7 @@ class EditCitaActivity : AppCompatActivity() {
 
         if (citaActual != null) {
             cargarDatosEnCampos(citaActual!!)
+            cargarRazasDesdeApi()
         } else {
             Toast.makeText(this, "No se encontró la cita", Toast.LENGTH_SHORT).show()
             finish()
@@ -69,6 +78,45 @@ class EditCitaActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun cargarRazasDesdeApi() {
+        val apiService = com.sigmas.dogapp.view.Network.RetrofitRazas
+            .instance.create(com.sigmas.dogapp.view.Network.DogApiService::class.java)
+
+        apiService.obtenerTodasLasRazas().enqueue(object : retrofit2.Callback<com.sigmas.dogapp.view.Data.Model.RazasResponse> {
+            override fun onResponse(
+                call: retrofit2.Call<com.sigmas.dogapp.view.Data.Model.RazasResponse>,
+                response: retrofit2.Response<com.sigmas.dogapp.view.Data.Model.RazasResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val razasMap = response.body()?.message ?: emptyMap()
+
+                    val listaRazas = razasMap.flatMap { (raza, subrazas) ->
+                        if (subrazas.isEmpty()) listOf(raza)
+                        else subrazas.map { sub -> "$raza $sub" }
+                    }.map { it.replaceFirstChar(Char::uppercaseChar) }.sorted()
+
+                    val adapter = ArrayAdapter(
+                        this@EditCitaActivity,
+                        R.layout.simple_dropdown_item_1line,
+                        listaRazas
+                    )
+                    binding.etRaza.setAdapter(adapter)
+                    binding.etRaza.setOnClickListener {
+                        binding.etRaza.showDropDown()
+                    }
+                } else {
+                    Toast.makeText(this@EditCitaActivity, "Error al cargar razas", Toast.LENGTH_SHORT).show()
+                }
+            }
+            override fun onFailure(
+                call: retrofit2.Call<com.sigmas.dogapp.view.Data.Model.RazasResponse>,
+                t: Throwable
+            ) {
+                Toast.makeText(this@EditCitaActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun configurarValidacionCampos() {
