@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import com.sigmas.dogapp.databinding.ActivityEditAppointmentBinding
 import com.sigmas.dogapp.view.Data.AppDatabase
@@ -26,6 +27,7 @@ class EditCitaActivity : AppCompatActivity() {
     private var citaActual: Cita? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
         binding = ActivityEditAppointmentBinding.inflate(layoutInflater)
         setContentView(binding.root)

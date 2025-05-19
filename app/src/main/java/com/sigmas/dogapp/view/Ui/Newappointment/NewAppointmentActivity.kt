@@ -28,7 +28,7 @@ class NewAppointmentActivity : AppCompatActivity() {
     private lateinit var citaRepository: CitaRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) // <--- ESTA LÍNEA
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
         binding = ActivityNewAppointmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
