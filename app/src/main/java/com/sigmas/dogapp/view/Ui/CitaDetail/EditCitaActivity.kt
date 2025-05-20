@@ -1,5 +1,6 @@
 package com.sigmas.dogapp.view.Ui.CitaDetail
 
+//noinspection SuspiciousImport
 import android.R
 import android.os.Bundle
 import android.text.Editable
@@ -13,14 +14,9 @@ import com.sigmas.dogapp.databinding.ActivityEditAppointmentBinding
 import com.sigmas.dogapp.view.Data.AppDatabase
 import com.sigmas.dogapp.view.Data.Model.Cita
 import com.sigmas.dogapp.view.Ui.Repository.CitaRepository
-import com.sigmas.dogapp.view.Data.Model.RazasResponse
-import com.sigmas.dogapp.view.Network.DogApiService
-import com.sigmas.dogapp.view.Network.RetrofitRazas
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import kotlinx.coroutines.launch
 
+@Suppress("DEPRECATION")
 class EditCitaActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditAppointmentBinding
     private lateinit var citaRepository: CitaRepository
@@ -75,7 +71,8 @@ class EditCitaActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 citaRepository.actualizar(citaEditada)
                 runOnUiThread {
-                    Toast.makeText(this@EditCitaActivity, "Cita actualizada", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@EditCitaActivity, "Cita Actualizada", Toast.LENGTH_SHORT).show()
+                    setResult(RESULT_OK)
                     finish()
                 }
             }

@@ -1,5 +1,6 @@
 package com.sigmas.dogapp.view.Ui.CitaDetail
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -35,12 +36,24 @@ class CitaDetailActivity : AppCompatActivity() {
         binding = ActivityCitaDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         binding.btnEditar.setOnClickListener {
             citaActual?.let { cita ->
                 val intent = Intent(this, EditCitaActivity::class.java)
-                intent.putExtra("cita", cita) // envías toda la cita
-                startActivity(intent)
+                intent.putExtra("cita", cita)
+                editarCitaLauncher.launch(intent)
+            }
+        }
+
+        binding.btnBorrar.setOnClickListener {
+            citaActual?.let { cita ->
+                val show = androidx.appcompat.app.AlertDialog.Builder(this)
+                    .setTitle("¿Eliminar cita?")
+                    .setMessage("¿Estás seguro de que deseas eliminar esta cita?")
+                    .setPositiveButton("Sí") { _, _ ->
+                        eliminarCita(cita)
+                    }
+                    .setNegativeButton("Cancelar", null)
+                    .show()
             }
         }
 
@@ -52,7 +65,7 @@ class CitaDetailActivity : AppCompatActivity() {
         }
         citaRepository = CitaRepository(AppDatabase.getDatabase(applicationContext).citaDao())
 
-        binding.btnVolver.setOnClickListener {
+        binding.btnBack.setOnClickListener {
             startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }
@@ -60,16 +73,26 @@ class CitaDetailActivity : AppCompatActivity() {
         cargarDatosCita(idCita)
     }
 
+    private val editarCitaLauncher = registerForActivityResult(
+        androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            citaActual?.id?.let { cargarDatosCita(it) }
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
     private fun cargarDatosCita(idCita: Int) {
         lifecycleScope.launch {
             val cita = citaRepository.obtenerPorId(idCita)
             if (cita != null) {
                 citaActual = cita
-                binding.tvDetalleTurno.text = "#${cita.id}"
-                binding.tvDetalleNombreMascota.text = cita.nombreMascota
-                binding.tvDetalleSintomas.text = "Síntomas: ${cita.sintomas ?: "No especificado"}"
-                binding.tvDetallePropietario.text = "Propietario: ${cita.nombrePropietario}"
-                binding.tvDetalleTelefono.text = "Teléfono: ${cita.telefono}"
+                binding.DetalleTurno.text = "#${cita.id}"
+                binding.TituloNombreMascota.text = cita.nombreMascota
+                binding.DetalleRaza .text = cita.raza
+                binding.DetalleSintomas.text = "Síntomas: ${cita.sintomas ?: "No especificado"}"
+                binding.DetallePropietario.text = "Propietario: ${cita.nombrePropietario}"
+                binding.DetalleTelefono.text = "Teléfono: ${cita.telefono}"
                 cargarImagenDesdeApi(normalizarRazaParaApi(cita.raza))
             } else {
                 Toast.makeText(this@CitaDetailActivity, "Cita no encontrada", Toast.LENGTH_SHORT).show()
@@ -78,6 +101,24 @@ class CitaDetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun eliminarCita(cita: Cita) {
+        lifecycleScope.launch {
+            try {
+                citaRepository.eliminar(cita)
+                runOnUiThread {
+                    Toast.makeText(this@CitaDetailActivity, "Cita eliminada", Toast.LENGTH_SHORT).show()
+                    // Regresar al Home
+                    val intent = Intent(this@CitaDetailActivity, HomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            } catch (e: Exception) {
+                runOnUiThread {
+                    Toast.makeText(this@CitaDetailActivity, "Error al eliminar: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
 
     private fun cargarImagenDesdeApi(razaApi: String) {
         val apiService = RetrofitRazas.instance.create(DogApiService::class.java)
@@ -124,5 +165,3 @@ class CitaDetailActivity : AppCompatActivity() {
             .into(binding.imgDetalleMascota)
     }
 }
-
-
