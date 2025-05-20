@@ -129,7 +129,7 @@ class NewAppointmentActivity : AppCompatActivity() {
             try {
                 citaRepository.insertar(cita)
                 runOnUiThread {
-                    Toast.makeText(this@NewAppointmentActivity, "Cita guardada", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@NewAppointmentActivity, "Cita Guardada", Toast.LENGTH_SHORT).show()
                     limpiarCampos()
 
                     // Navegar a Home
