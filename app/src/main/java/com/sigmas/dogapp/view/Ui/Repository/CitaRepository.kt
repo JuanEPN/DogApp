@@ -23,4 +23,9 @@ class CitaRepository(private val citaDao: CitaDao) {
     suspend fun obtenerTodasLasCitas(): List<Cita> {
         return citaDao.getAllAppointments()
     }
+
+    suspend fun eliminar(cita: Cita) {
+        citaDao.eliminar(cita)
+    }
+
 }
