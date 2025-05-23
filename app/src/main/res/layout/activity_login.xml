@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?> <!-- [Pantalla de Login] (Vista principal con autenticación por huella digital) -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     android:background="#212931" >
 
-    <!-- Imagen del perro como se muestra en la historia de usuario -->
-
+    <!-- [Imagen de Logo de Perro] (Logo visual en la parte superior derecha, representando la app) -->
     <ImageView
         android:id="@+id/imgDog"
         android:layout_width="120dp"
@@ -21,14 +20,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
-    <!-- Titulo de la aplicacion  -->
-
+    <!-- [Título DogApp] (Nombre de la app en texto grande y centrado visualmente) -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imgDog"
-        android:layout_centerHorizontal="true"
         android:text="DogApp"
         android:textColor="@android:color/white"
         android:textSize="60sp"
@@ -40,8 +36,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imgDog"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Animacion de la huella   -->
-
+    <!-- [Animación de Huella Digital] (Animación de Lottie con bucle para autenticación biométrica) -->
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/fingerprintAnimation"
         android:layout_width="250dp"

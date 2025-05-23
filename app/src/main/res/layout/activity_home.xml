@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?> <!-- [Pantalla Principal: Administrador de Citas] (Muestra la lista de citas y permite añadir nuevas) -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
-    <!-- HEADER -->
+    <!-- [Encabezado Curvado] (Header con fondo gris oscuro curvado en esquina inferior derecha) -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/headerLayout"
         android:layout_width="0dp"
@@ -16,6 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- [Título Principal] (Texto blanco grande con salto de línea indicando sección "Administrador de Citas") -->
         <TextView
             android:id="@+id/tvAdministrador"
             android:layout_width="wrap_content"
@@ -31,7 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
+        <!-- [Logo del Perro] (Imagen decorativa de un perro en la parte superior derecha del header) -->
         <ImageView
             android:id="@+id/imgDog"
             android:layout_width="100dp"
@@ -43,6 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- [Texto DogApp] (Etiqueta decorativa debajo del logo del perro) -->
         <TextView
             android:id="@+id/tvDogApp"
             android:layout_width="wrap_content"
@@ -57,7 +59,7 @@
             app:layout_constraintTop_toBottomOf="@id/imgDog" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- LISTADO DE CITAS -->
+    <!-- [Listado de Citas] (RecyclerView que muestra todas las citas agendadas por el usuario) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCitas"
         android:layout_width="0dp"
@@ -71,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@id/headerLayout"
         app:layout_constraintVertical_bias="0.0" />
 
-    <!-- BOTÓN -->
+    <!-- [Botón Flotante de Añadir Cita] (Botón redondo flotante en esquina inferior derecha para crear nueva cita) -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddCita"
         android:layout_width="wrap_content"

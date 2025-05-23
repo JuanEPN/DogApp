@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?> <!-- [Pantalla: Nueva Cita] (Formulario para registrar una nueva cita de mascota) -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
+    <!-- [Encabezado personalizado] (Toolbar con fondo gris curvo, botón atrás y título centrado) -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/headerLayout"
         android:layout_width="0dp"
@@ -16,6 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!-- [Botón de retroceso] (Flecha rosada para volver al menú principal) -->
         <ImageView
             android:id="@+id/btnBack"
             android:layout_width="45dp"
@@ -29,6 +31,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="UseAppTint" />
 
+        <!-- [Título de la pantalla] (Texto “Nueva Cita” blanco y centrado horizontalmente) -->
         <TextView
             android:id="@+id/TitleNuevaCita"
             android:layout_width="wrap_content"
@@ -44,8 +47,7 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Campos del formulario -->
-
+    <!-- [Campo: Nombre Mascota] (Entrada de texto con bordes redondeados y validación) -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutNombreMascota"
         android:layout_width="0dp"
@@ -81,6 +83,7 @@
             android:backgroundTint="@android:color/transparent" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- [Campo: Raza de la Mascota] (Selector con autocompletado para elegir la raza) -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutRaza"
         android:layout_width="0dp"
@@ -116,6 +119,7 @@
             tools:ignore="LabelFor" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- [Campo: Nombre del Propietario] (Entrada de texto con bordes personalizados) -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutNombrePropietario"
         android:layout_width="0dp"
@@ -151,6 +155,7 @@
             android:backgroundTint="@android:color/transparent" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- [Campo: Teléfono] (Entrada numérica para contacto del propietario) -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutTelefono"
         android:layout_width="0dp"
@@ -186,6 +191,7 @@
             android:backgroundTint="@android:color/transparent" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- [Campo: Síntomas] (Menú desplegable con opciones predefinidas) -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutSintomas"
         android:layout_width="0dp"
@@ -222,6 +228,7 @@
         tools:ignore="TouchTargetSizeCheck" />
 </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- [Botón: Guardar Cita] (Botón estilizado con ícono para registrar nueva cita) -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnGuardar"
         android:layout_width="0dp"
@@ -243,6 +250,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- [Guía de alineación opcional] (Guía horizontal para posicionar elementos, no usada directamente) -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"

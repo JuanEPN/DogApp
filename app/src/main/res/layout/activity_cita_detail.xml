@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?> <!-- [Pantalla de Detalle de Cita] (Muestra los datos completos de la cita seleccionada con opciones de edición y eliminación) -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
+    <!-- [Toolbar personalizada] (Cabecera con fondo oscuro, flecha atrás y nombre de la mascota centrado) -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/headerLayout"
         android:layout_width="0dp"
@@ -44,7 +45,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Card inferior (contenedor blanco con contenido) -->
+    <!-- [CardView contenido de la cita] (Tarjeta blanca con turno, raza, síntomas, propietario y teléfono) -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardDetalle"
         android:layout_width="0dp"
@@ -64,6 +65,7 @@
             android:paddingBottom="20dp"
             android:paddingHorizontal="16dp">
 
+            <!-- [Texto Turno] (Muestra el número de cita en la parte superior derecha del cuadro) -->
             <TextView
                 android:id="@+id/DetalleTurno"
                 android:layout_width="wrap_content"
@@ -75,6 +77,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
+            <!-- [Texto Raza] (Nombre de la raza de la mascota en el centro, en negrita) -->
             <TextView
                 android:id="@+id/DetalleRaza"
                 android:layout_width="wrap_content"
@@ -87,6 +90,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="100dp" />
 
+            <!-- [Texto Síntomas] (Descripción de síntomas centrado debajo de raza) -->
             <TextView
                 android:id="@+id/DetalleSintomas"
                 android:layout_width="wrap_content"
@@ -97,6 +101,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="8dp" />
 
+            <!-- [Separador rosa] (Línea decorativa debajo de los síntomas) -->
             <View
                 android:layout_width="250dp"
                 android:layout_height="2dp"
@@ -106,6 +111,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
+            <!-- [Texto Propietario] (Nombre del propietario alineado a la izquierda) -->
             <TextView
                 android:id="@+id/DetallePropietario"
                 android:layout_width="wrap_content"
@@ -115,6 +121,7 @@
                 android:layout_marginTop="24dp"
                 app:layout_constraintStart_toStartOf="parent" />
 
+            <!-- [Texto Teléfono] (Teléfono del propietario debajo del nombre) -->
             <TextView
                 android:id="@+id/DetalleTelefono"
                 android:layout_width="wrap_content"
@@ -126,6 +133,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- [Card de imagen] (Contiene imagen de la mascota con borde y sobresalida sobre la otra tarjeta) -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardImagen"
         android:layout_width="180dp"
@@ -147,7 +155,7 @@
             android:padding="7dp"/>
     </androidx.cardview.widget.CardView>
 
-    <!-- Botón Editar -->
+    <!-- [Botón Editar] (Botón negro con ícono para editar la cita actual) -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEditar"
         android:layout_width="50dp"
@@ -166,7 +174,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón Borrar -->
+    <!-- [Botón Borrar] (Botón rojo con ícono de eliminar para borrar la cita) -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnBorrar"
         android:layout_width="50dp"

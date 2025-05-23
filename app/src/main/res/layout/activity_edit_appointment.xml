@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?> <!-- [Pantalla de Edición de Cita] (Permite al usuario editar los campos de una cita ya creada) -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
+    <!-- [Toolbar personalizada] (Encabezado superior con fondo curvado y título "Editar Cita") -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/headerLayout"
         android:layout_width="0dp"
@@ -17,6 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!-- [Botón Volver] (Botón de flecha rosada para regresar a la pantalla anterior) -->
         <ImageView
             android:id="@+id/btnBack"
             android:layout_width="45dp"
@@ -30,6 +32,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="UseAppTint" />
 
+        <!-- [Título de la Pantalla] (Texto centrado en blanco con texto "Editar Cita") -->
         <TextView
             android:id="@+id/TitleEditarCita"
             android:layout_width="wrap_content"
@@ -45,7 +48,7 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Campos del formulario -->
+    <!-- [Campo Nombre de la Mascota] (Campo de texto con borde morado para ingresar el nombre del perro) -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutNombreMascota"
         android:layout_width="0dp"
@@ -81,6 +84,7 @@
             android:backgroundTint="@android:color/transparent" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- [Campo Raza] (AutoCompleteTextView para seleccionar la raza del perro desde una lista) -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutRaza"
         android:layout_width="0dp"
@@ -116,6 +120,7 @@
             tools:ignore="LabelFor" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- [Campo Nombre del Propietario] (Campo de texto para ingresar el nombre del dueño del perro) -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutNombrePropietario"
         android:layout_width="0dp"
@@ -151,6 +156,7 @@
             android:backgroundTint="@android:color/transparent" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- [Campo Teléfono] (Campo de texto para ingresar el número telefónico del propietario) -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutTelefono"
         android:layout_width="0dp"
@@ -186,6 +192,7 @@
             android:backgroundTint="@android:color/transparent" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- [Botón Guardar] (Botón circular con ícono que permite guardar los cambios realizados) -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnGuardar"
         android:layout_width="0dp"

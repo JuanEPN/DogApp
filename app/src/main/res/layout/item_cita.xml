@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?> <!-- [Tarjeta de Cita] (Diseño visual para mostrar una cita veterinaria individual en una CardView) -->
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,12 +8,13 @@
     app:cardCornerRadius="16dp"
     app:cardElevation="8dp">
 
+    <!-- [Contenedor Interno] (Distribuye los elementos dentro de la tarjeta con ConstraintLayout) -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp">
 
-        <!-- Foto Mascota -->
+        <!-- [Imagen de la Mascota] (Foto circular con borde rosado usando CircleImageView) -->
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgMascota"
             android:layout_width="60dp"
@@ -24,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <!-- Nombre de la mascota -->
+        <!-- [Nombre de la Mascota] (Texto grande y en negrita junto a la imagen) -->
         <TextView
             android:id="@+id/tvNombreMascota"
             android:layout_width="0dp"
@@ -38,7 +39,7 @@
             app:layout_constraintStart_toEndOf="@id/imgMascota"
             app:layout_constraintEnd_toStartOf="@id/tvTurno" />
 
-        <!-- Turno -->
+        <!-- [Número de Turno] (Identificador destacado en color rosado al final de la fila) -->
         <TextView
             android:id="@+id/tvTurno"
             android:layout_width="wrap_content"
@@ -51,7 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"/>
 
-        <!-- Síntoma -->
+        <!-- [Descripción del Síntoma] (Texto secundario en gris más pequeño debajo del nombre) -->
         <TextView
             android:id="@+id/tvSintoma"
             android:layout_width="0dp"
