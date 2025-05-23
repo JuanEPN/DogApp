@@ -19,29 +19,34 @@ import com.sigmas.dogapp.view.Ui.Repository.CitaRepository
 import com.sigmas.dogapp.view.Ui.Home.HomeActivity
 import kotlinx.coroutines.launch
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 
 class NewAppointmentActivity : AppCompatActivity() {
 
+    // [Variables globales] (Binding y repositorio de citas)
     private lateinit var binding: ActivityNewAppointmentBinding
     private lateinit var citaRepository: CitaRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // [Modo claro forzado] (Evita interferencias visuales con dark mode)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
+
+        // [Inicializar Binding y setContentView] (Inflamos la vista de forma segura)
         binding = ActivityNewAppointmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inicializar repositorio
+        // [Instancia de base de datos y repositorio] (Acceso a Room para insertar citas)
         val database = AppDatabase.getDatabase(applicationContext)
         citaRepository = CitaRepository(database.citaDao())
 
+        // [Configuraciones iniciales de la pantalla] (Dropdowns, API razas, insets y validaciones)
         configurarDropdown()
         cargarRazasDesdeApi()
         configurarInsets()
         configurarValidacion()
 
+        // [Botón guardar cita] (Validación de síntoma y almacenamiento)
         binding.btnGuardar.setOnClickListener {
             if (binding.spinnerSintomas.text.toString() == "Síntomas") {
                 Toast.makeText(this, "Selecciona un síntoma", Toast.LENGTH_SHORT).show()
@@ -50,18 +55,20 @@ class NewAppointmentActivity : AppCompatActivity() {
             guardarCita()
         }
 
-
+        // [Botón volver] (Regresa a pantalla Home)
         binding.btnBack.setOnClickListener {
             navegarAHome()
         }
     }
 
+    // [Navegación a HomeActivity] (Cuando el usuario presiona volver)
     private fun navegarAHome() {
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
     }
 
+    // [Configurar dropdown de síntomas] (Lista de síntomas y comportamiento del spinner)
     private fun configurarDropdown() {
         val sintomasList = listOf(
             "Síntomas",  // valor inicial por defecto
@@ -75,17 +82,13 @@ class NewAppointmentActivity : AppCompatActivity() {
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, sintomasList)
         binding.spinnerSintomas.setAdapter(adapter)
-
-        // Valor por defecto mostrado
         binding.spinnerSintomas.setText("Síntomas", false)
-
-        // Mostrar lista al tocar
         binding.spinnerSintomas.setOnClickListener {
             binding.spinnerSintomas.showDropDown()
         }
     }
 
-
+    // [Aplicar márgenes seguros] (Insets para evitar solapamiento con barras del sistema)
     private fun configurarInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -94,6 +97,7 @@ class NewAppointmentActivity : AppCompatActivity() {
         }
     }
 
+    // [Validación de campos del formulario] (Escucha cambios y activa botón guardar si es válido)
     private fun configurarValidacion() {
         val campos = listOf(
             binding.etNombreMascota,
@@ -114,6 +118,7 @@ class NewAppointmentActivity : AppCompatActivity() {
         }
     }
 
+    // [Guardar cita en Room] (Toma los datos del formulario y los almacena localmente)
     private fun guardarCita() {
         val cita = Cita(
             nombrePropietario = binding.etNombrePropietario.text.toString().trim(),
@@ -131,8 +136,6 @@ class NewAppointmentActivity : AppCompatActivity() {
                 runOnUiThread {
                     Toast.makeText(this@NewAppointmentActivity, "Cita Guardada", Toast.LENGTH_SHORT).show()
                     limpiarCampos()
-
-                    // Navegar a Home
                     val intent = Intent(this@NewAppointmentActivity, HomeActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -145,6 +148,7 @@ class NewAppointmentActivity : AppCompatActivity() {
         }
     }
 
+    // [Limpiar campos del formulario] (Después de guardar una cita exitosamente)
     private fun limpiarCampos() {
         binding.etNombrePropietario.text?.clear()
         binding.etNombreMascota.text?.clear()
@@ -153,6 +157,7 @@ class NewAppointmentActivity : AppCompatActivity() {
         binding.spinnerSintomas.text?.clear()
     }
 
+    // [Validar que todos los campos estén llenos] (Activa o desactiva el botón Guardar)
     private fun validarCamposObligatorios() {
         val nombreMascota = binding.etNombreMascota.text?.isNotEmpty() == true
         val raza = binding.etRaza.text?.isNotEmpty() == true
@@ -161,17 +166,16 @@ class NewAppointmentActivity : AppCompatActivity() {
         val sintomas = binding.spinnerSintomas.text?.isNotEmpty() == true
 
         val camposValidos = nombreMascota && raza && nombrePropietario && telefono
-
         binding.btnGuardar.isEnabled = camposValidos
 
-        // Color y estilo (opcional redundante si usas el selector)
+        // [Color del texto del botón según validación] (Visualmente indica si está activo)
         binding.btnGuardar.setTextColor(
             if (camposValidos) resources.getColor(android.R.color.white)
             else resources.getColor(android.R.color.darker_gray)
         )
     }
 
-
+    // [Cargar razas desde la API] (Usa Retrofit para obtener lista de razas del endpoint)
     private fun cargarRazasDesdeApi() {
         val apiService = com.sigmas.dogapp.view.Network.RetrofitRazas
             .instance.create(com.sigmas.dogapp.view.Network.DogApiService::class.java)
@@ -196,7 +200,6 @@ class NewAppointmentActivity : AppCompatActivity() {
                     )
 
                     binding.etRaza.setAdapter(adapter)
-
                     binding.etRaza.setOnClickListener {
                         binding.etRaza.showDropDown()
                     }

@@ -1,6 +1,5 @@
 package com.sigmas.dogapp.view.Ui.CitaDetail
 
-//noinspection SuspiciousImport
 import android.R
 import android.os.Bundle
 import android.text.Editable
@@ -18,21 +17,29 @@ import kotlinx.coroutines.launch
 
 @Suppress("DEPRECATION")
 class EditCitaActivity : AppCompatActivity() {
+
+    // [Variables principales] (Binding, repositorio y cita actual a editar)
     private lateinit var binding: ActivityEditAppointmentBinding
     private lateinit var citaRepository: CitaRepository
     private var citaActual: Cita? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // [Forzar modo claro] (Desactiva modo oscuro para mantener diseño consistente)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
+
+        // [Inicializar binding y vista] (Carga el layout con ViewBinding)
         binding = ActivityEditAppointmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // [Inicializar base de datos y repositorio] (Se conecta con Room vía DAO)
         val database = AppDatabase.getDatabase(applicationContext)
         citaRepository = CitaRepository(database.citaDao())
 
+        // [Obtener cita del intent] (Recoge la cita enviada desde otra actividad)
         citaActual = intent.getParcelableExtra("cita")
 
+        // [Verificar si existe cita] (Si no, mostrar mensaje y cerrar actividad)
         if (citaActual != null) {
             cargarDatosEnCampos(citaActual!!)
             cargarRazasDesdeApi()
@@ -41,17 +48,21 @@ class EditCitaActivity : AppCompatActivity() {
             finish()
         }
 
+        // [Botón atrás] (Cierra esta ventana y regresa)
         binding.btnBack.setOnClickListener {
             finish()
         }
 
+        // [Botón guardar] (Llama a la función que actualiza los cambios)
         binding.btnGuardar.setOnClickListener {
             guardarCambios()
         }
 
+        // [Validación de campos] (Activa o desactiva el botón según si los campos están llenos)
         configurarValidacionCampos()
     }
 
+    // [Cargar datos en los campos] (Llena los EditText con los datos de la cita actual)
     private fun cargarDatosEnCampos(cita: Cita) {
         binding.etNombreMascota.setText(cita.nombreMascota)
         binding.etRaza.setText(cita.raza)
@@ -59,6 +70,7 @@ class EditCitaActivity : AppCompatActivity() {
         binding.etTelefono.setText(cita.telefono)
     }
 
+    // [Guardar cambios] (Actualiza la cita en la base de datos con los nuevos datos)
     private fun guardarCambios() {
         val citaEditada = citaActual?.copy(
             nombreMascota = binding.etNombreMascota.text.toString().trim(),
@@ -79,6 +91,7 @@ class EditCitaActivity : AppCompatActivity() {
         }
     }
 
+    // [Cargar razas desde API] (Obtiene las razas de perros usando Retrofit y las muestra como sugerencias)
     private fun cargarRazasDesdeApi() {
         val apiService = com.sigmas.dogapp.view.Network.RetrofitRazas
             .instance.create(com.sigmas.dogapp.view.Network.DogApiService::class.java)
@@ -109,6 +122,7 @@ class EditCitaActivity : AppCompatActivity() {
                     Toast.makeText(this@EditCitaActivity, "Error al cargar razas", Toast.LENGTH_SHORT).show()
                 }
             }
+
             override fun onFailure(
                 call: retrofit2.Call<com.sigmas.dogapp.view.Data.Model.RazasResponse>,
                 t: Throwable
@@ -118,6 +132,7 @@ class EditCitaActivity : AppCompatActivity() {
         })
     }
 
+    // [Validación de campos de texto] (Habilita el botón si todos los campos están llenos)
     private fun configurarValidacionCampos() {
         val watcher = object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
