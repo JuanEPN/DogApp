@@ -1,6 +1,7 @@
 package com.sigmas.dogapp.view.Ui.CitaDetail
 
 import android.R
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.sigmas.dogapp.databinding.ActivityEditAppointmentBinding
 import com.sigmas.dogapp.view.Data.AppDatabase
 import com.sigmas.dogapp.view.Data.Model.Cita
+import com.sigmas.dogapp.view.Ui.Home.HomeActivity
 import com.sigmas.dogapp.view.Ui.Repository.CitaRepository
 import kotlinx.coroutines.launch
 
@@ -70,7 +72,7 @@ class EditCitaActivity : AppCompatActivity() {
         binding.etTelefono.setText(cita.telefono)
     }
 
-    // [Guardar cambios] (Actualiza la cita en la base de datos con los nuevos datos)
+    // [Guardar cambios] (Actualiza la cita en la base de datos con los nuevos datos y vuelve a Home)
     private fun guardarCambios() {
         val citaEditada = citaActual?.copy(
             nombreMascota = binding.etNombreMascota.text.toString().trim(),
@@ -84,7 +86,11 @@ class EditCitaActivity : AppCompatActivity() {
                 citaRepository.actualizar(citaEditada)
                 runOnUiThread {
                     Toast.makeText(this@EditCitaActivity, "Cita Actualizada", Toast.LENGTH_SHORT).show()
-                    setResult(RESULT_OK)
+
+                    // [Redirigir a HU 2.0 Home] (Cierra todas las pantallas anteriores)
+                    val intent = Intent(this@EditCitaActivity, HomeActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
                     finish()
                 }
             }
