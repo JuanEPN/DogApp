@@ -26,6 +26,9 @@
         <!-- PANTALLA DE DETALLE DE CITAS -->
         <activity android:name=".view.Ui.CitaDetail.CitaDetailActivity" />
 
+        <!-- Pantalla para editar citas -->
+        <activity android:name=".view.Ui.CitaDetail.EditCitaActivity" />
+
         <!-- Login  -->
         <activity
             android:name=".view.LoginActivity"

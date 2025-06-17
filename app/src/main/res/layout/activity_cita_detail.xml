@@ -1,92 +1,196 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollView"
+<?xml version="1.0" encoding="utf-8"?> <!-- [Pantalla de Detalle de Cita] (Muestra los datos completos de la cita seleccionada con opciones de edición y eliminación) -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:fillViewport="true"
-    android:background="@android:color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@android:color/white">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:background="@android:color/white">
+    <!-- [Toolbar personalizada] (Cabecera con fondo oscuro, flecha atrás y nombre de la mascota centrado) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="0dp"
+        android:layout_height="110dp"
+        android:background="@drawable/rounded_right"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="34dp"
+            android:contentDescription="@string/bot_n_volver"
+            android:src="@drawable/ic_arrow_back"
+            android:tint="#F05861"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UseAppTint" />
+
+        <TextView
+            android:id="@+id/TituloNombreMascota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nombre_mascota"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- [CardView contenido de la cita] (Tarjeta blanca con turno, raza, síntomas, propietario y teléfono) -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardDetalle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginHorizontal="24dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/headerLayout"
-            android:layout_width="350dp"
-            android:layout_height="110dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/rounded_right"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"
+            android:paddingHorizontal="16dp">
+
+            <!-- [Texto Turno] (Muestra el número de cita en la parte superior derecha del cuadro) -->
+            <TextView
+                android:id="@+id/DetalleTurno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/turno"
+                android:textColor="#D23B69"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- [Texto Raza] (Nombre de la raza de la mascota en el centro, en negrita) -->
+            <TextView
+                android:id="@+id/DetalleRaza"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/raza"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/DetalleTurno"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="100dp" />
+
+            <!-- [Texto Síntomas] (Descripción de síntomas centrado debajo de raza) -->
+            <TextView
+                android:id="@+id/DetalleSintomas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sintomas"
+                app:layout_constraintTop_toBottomOf="@id/DetalleRaza"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp" />
+
+            <!-- [Separador rosa] (Línea decorativa debajo de los síntomas) -->
+            <View
+                android:layout_width="250dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:background="#D23B69"
+                app:layout_constraintTop_toBottomOf="@id/DetalleSintomas"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- [Texto Propietario] (Nombre del propietario alineado a la izquierda) -->
+            <TextView
+                android:id="@+id/DetallePropietario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nombre_propietario"
+                app:layout_constraintTop_toBottomOf="@id/DetalleSintomas"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- [Texto Teléfono] (Teléfono del propietario debajo del nombre) -->
+            <TextView
+                android:id="@+id/DetalleTelefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/telefono"
+                app:layout_constraintTop_toBottomOf="@id/DetallePropietario"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="8dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- [Card de imagen] (Contiene imagen de la mascota con borde y sobresalida sobre la otra tarjeta) -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardImagen"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="-60dp"
+        app:cardElevation="9dp"
+        app:layout_constraintTop_toTopOf="@id/cardDetalle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:id="@+id/imgDetalleMascota"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_dog"
-            />
+            android:background="@drawable/img_border"
+            android:contentDescription="@string/DetalleImgPerro"
+            android:padding="7dp"/>
+    </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/tvDetalleTurno"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Turno #"
-            android:textColor="#D23B69"
-            android:gravity="end"
-            android:textStyle="bold" />
+    <!-- [Botón Editar] (Botón negro con ícono para editar la cita actual) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnEditar"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:minHeight="48dp"
+        android:minWidth="48dp"
+        android:backgroundTint="#212931"
+        android:layout_marginTop="250dp"
+        android:layout_marginStart="316dp"
+        android:contentDescription="@string/editar_cita"
+        app:icon="@drawable/ic_edit"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:cornerRadius="10dp"
+        app:layout_constraintTop_toBottomOf="@id/cardDetalle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:id="@+id/tvDetalleNombreMascota"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nombre de la mascota"
-            android:textSize="22sp"
-            android:layout_marginBottom="8dp" />
+    <!-- [Botón Borrar] (Botón rojo con ícono de eliminar para borrar la cita) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBorrar"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:minHeight="48dp"
+        android:minWidth="48dp"
+        android:backgroundTint="#F05861"
+        android:layout_marginTop="250dp"
+        android:layout_marginStart="-316dp"
+        android:contentDescription="@string/editar_cita"
+        app:icon="@drawable/ic_delete"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:cornerRadius="10dp"
+        app:layout_constraintTop_toBottomOf="@id/cardDetalle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:id="@+id/tvDetalleSintomas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="Síntomas" />
-
-        <View
-            android:layout_width="250dp"
-            android:layout_height="2dp"
-            android:background="#D23B69"
-            android:layout_marginBottom="12dp" />
-
-        <TextView
-            android:id="@+id/tvDetallePropietario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Propietario" />
-
-        <TextView
-            android:id="@+id/tvDetalleTelefono"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="Teléfono" />
-
-        <Button
-            android:id="@+id/btnVolver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Volver" />
-    </LinearLayout>
-</ScrollView>
-
-
-
+</androidx.constraintlayout.widget.ConstraintLayout>

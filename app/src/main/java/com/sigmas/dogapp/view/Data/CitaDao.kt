@@ -17,5 +17,8 @@ interface CitaDao {
 
     @Query("SELECT * FROM citas")
     suspend fun getAllAppointments(): List<Cita>
+
+    @Delete
+    suspend fun eliminar(cita: Cita)
 }
 
