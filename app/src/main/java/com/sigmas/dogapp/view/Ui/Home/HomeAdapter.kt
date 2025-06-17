@@ -86,7 +86,22 @@ class HomeAdapter(
 
         // [Normalizar nombre de raza] (Elimina tildes y caracteres especiales para que funcione con la API)
         private fun normalizarRazaParaApi(raza: String): String {
-            return raza.lowercase()
+            val traducciones = mapOf(
+                "bulldog francés" to "bulldog/french",
+                "bulldog inglés" to "bulldog/english",
+                "terrier escocés" to "terrier/scottish",
+                "pastor alemán" to "germanshepherd",
+                "labrador retriever" to "labrador",
+                "golden retriever" to "retriever/golden",
+                "husky siberiano" to "husky",
+                "dálmata" to "dalmatian",
+                "pug" to "pug",
+                "beagle" to "beagle"
+
+            )
+
+            val razaNormalizada = raza.lowercase().trim()
+            return traducciones[razaNormalizada] ?: razaNormalizada
                 .replace("[áàäâ]".toRegex(), "a")
                 .replace("[éèëê]".toRegex(), "e")
                 .replace("[íìïî]".toRegex(), "i")
