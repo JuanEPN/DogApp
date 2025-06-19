@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.sigmas.dogapp.Ui.Fragment.HomeFragment"
+        android:label="Inicio"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/listaCitasFragment"
+        android:name="com.sigmas.dogapp.ui.fragment.ListaCitasFragment"
+        android:label="Lista de Citas"
+        tools:layout="@layout/fragment_lista_citas">
+        <action
+            android:id="@+id/action_listaCitasFragment_to_editarCitaFragment"
+            app:destination="@id/editarCitaFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editarCitaFragment"
+        android:name="com.sigmas.dogapp.ui.fragment.EditarCitaFragment"
+        android:label="Editar Cita"
+        tools:layout="@layout/fragment_editar_cita">
+        <argument
+            android:name="citaId"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nuevaCitaFragment"
+        android:name="com.sigmas.dogapp.ui.fragment.NuevaCitaFragment"
+        android:label="Nueva Cita"
+        tools:layout="@layout/activity_new_appointment" />
+
+    <fragment
+        android:id="@+id/citaDetailFragment"
+        android:name="com.sigmas.dogapp.UI.Fragments.CitaDetailFragment">
+    <argument
+        android:name="citaId"
+        app:argType="integer" />
+</fragment>
+
+
+
+
+    </navigation>

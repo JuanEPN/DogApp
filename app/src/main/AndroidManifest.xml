@@ -10,28 +10,16 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/dog_head"
+        android:icon="@drawable/lg_dog"
         android:label="@string/app_name"
         android:roundIcon="@drawable/lg_dog"
         android:supportsRtl="true"
         android:theme="@style/Theme.DogApp"
         tools:targetApi="31">
 
-        <!-- Pantalla principal  -->
-        <activity android:name=".view.Ui.Home.HomeActivity" />
-
-        <!-- Pantalla para crear nuevas citas -->
-        <activity android:name=".view.Ui.Newappointment.NewAppointmentActivity" />
-
-        <!-- ✅ PANTALLA DE DETALLE DE CITAS -->
-        <activity android:name=".view.Ui.CitaDetail.CitaDetailActivity" />
-
-        <!-- Pantalla para editar citas -->
-        <activity android:name=".view.Ui.CitaDetail.EditCitaActivity" />
-
         <!-- Login  -->
         <activity
-            android:name=".view.LoginActivity"
+            android:name=".Ui.Login.LoginActivity"
             android:exported="true"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.DogApp">
@@ -40,6 +28,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Pantalla de inicio -->
+        <activity
+            android:name=".Ui.Home.HomeActivity"
+            android:exported="false" />
+
+        <!-- Pantalla para crear nuevas citas -->
+        <activity android:name=".Ui.Newappointment.NewAppointmentActivity" />
+
+        <!-- Pantalla de detalle cita -->
+        <activity android:name=".Ui.CitaDetail.CitaDetailActivity" />
+
+        <!-- Pantalla para editar citas -->
+        <activity android:name=".Ui.CitaDetail.EditCitaActivity" />
 
     </application>
 
