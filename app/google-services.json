@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "315068523047",
+    "project_id": "dogappgrupo5",
+    "storage_bucket": "dogappgrupo5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315068523047:android:70adc5f70789cdcc366402",
+        "android_client_info": {
+          "package_name": "com.sigmas.dogapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHlTVOplxqVjKEhCwKFH7IWuRb_hlEzYY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

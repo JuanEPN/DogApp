@@ -5,6 +5,7 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -103,6 +104,15 @@ dependencies {
     // Fotos en círculo
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.15.0"))
+
+    //authentication
+    implementation("com.google.firebase:firebase-auth-ktx")
+
+    //Firestore
+    implementation("com.google.firebase:firebase-firestore-ktx")
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -121,7 +131,6 @@ dependencies {
     // Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
     kapt("com.github.bumptech.glide:compiler:4.16.0")
-
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
