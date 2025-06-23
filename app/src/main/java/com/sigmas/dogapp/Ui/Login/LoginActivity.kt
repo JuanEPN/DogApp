@@ -2,79 +2,108 @@ package com.sigmas.dogapp.Ui.Login
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.biometric.BiometricPrompt
-import androidx.core.content.ContextCompat
-import com.airbnb.lottie.LottieAnimationView
-import com.sigmas.dogapp.R
+import androidx.core.widget.addTextChangedListener
+import com.google.firebase.auth.FirebaseAuth
+import com.sigmas.dogapp.databinding.ActivityLoginBinding
 import com.sigmas.dogapp.Ui.Home.HomeActivity
 
-// [Login con autenticación biométrica] (Pantalla de inicio de sesión con lector de huella usando BiometricPrompt)
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var fingerprintAnimation: LottieAnimationView
-    private lateinit var btnAcceder: Button
-
-    // Prompt de autenticación biométrica
-    private lateinit var biometricPrompt: BiometricPrompt
-    private lateinit var promptInfo: BiometricPrompt.PromptInfo
+    // [Variables principales] (Binding y Firebase Auth)
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        // Referencias UI
-        fingerprintAnimation = findViewById(R.id.fingerprintAnimation)
-        btnAcceder = findViewById(R.id.btnAcceder)
+        firebaseAuth = FirebaseAuth.getInstance()
 
-        // Click animación de huella
-        fingerprintAnimation.setOnClickListener {
-            mostrarDialogoBiometrico()
+        // [Deshabilitar botones inicialmente]
+        binding.btnLogin.isEnabled = false
+        binding.btnRegistrate.isEnabled = false
+        actualizarColorBotones(false)
+
+        // [Activar botones solo si los campos están llenos]
+        binding.etEmail.addTextChangedListener { validarBotones() }
+        binding.etPassword.addTextChangedListener { validarBotones() }
+
+        // [Login existente]
+        binding.btnLogin.setOnClickListener {
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString()
+
+            if (!validarCampos(email, password)) return@setOnClickListener
+
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        navegarAHU2()
+                    } else {
+                        Toast.makeText(this, "Login Incorrecto", Toast.LENGTH_SHORT).show()
+                    }
+                }
         }
 
-        // Click botón para acceder sin huella
-        btnAcceder.setOnClickListener {
-            navegarAHU2()
+        // [Registrar nuevo usuario]
+        binding.btnRegistrate.setOnClickListener {
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString()
+
+            if (!validarCampos(email, password)) return@setOnClickListener
+
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show()
+                        navegarAHU2()
+                    } else {
+                        Toast.makeText(this, "Error: este usuario ya existe o es inválido", Toast.LENGTH_LONG).show()
+                    }
+                }
         }
     }
 
-    // Mostrar diálogo de autenticación biométrica
-    private fun mostrarDialogoBiometrico() {
-        val executor = ContextCompat.getMainExecutor(this)
-
-        biometricPrompt = BiometricPrompt(
-            this, executor,
-            object : BiometricPrompt.AuthenticationCallback() {
-
-                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                    super.onAuthenticationSucceeded(result)
-                    navegarAHU2()
-                }
-
-                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
-                    super.onAuthenticationError(errorCode, errString)
-                    Toast.makeText(applicationContext, "Error: $errString", Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onAuthenticationFailed() {
-                    super.onAuthenticationFailed()
-                    Toast.makeText(applicationContext, "Huella no reconocida", Toast.LENGTH_SHORT).show()
-                }
-            })
-
-        // Configurar diálogo
-        promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Autenticación con Biometría")
-            .setSubtitle("Coloca tu dedo en el sensor")
-            .setNegativeButtonText("Cancelar")
-            .build()
-
-        biometricPrompt.authenticate(promptInfo)
+    // [Validar email y password] (Formato, longitud mínima y campos llenos)
+    private fun validarCampos(email: String, password: String): Boolean {
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Correo electrónico inválido", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (password.length < 6) {
+            Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
     }
 
-    // Navegar a HomeActivity
+    // [Activar botones si los campos están llenos]
+    private fun validarBotones() {
+        val emailLleno = binding.etEmail.text?.isNotEmpty() == true
+        val passwordLleno = binding.etPassword.text?.isNotEmpty() == true
+        val habilitar = emailLleno && passwordLleno
+
+        binding.btnLogin.isEnabled = habilitar
+        binding.btnRegistrate.isEnabled = habilitar
+        actualizarColorBotones(habilitar)
+    }
+
+    // [Actualizar estilo visual de los botones]
+    private fun actualizarColorBotones(habilitar: Boolean) {
+        val colorTexto = if (habilitar) android.R.color.white else android.R.color.darker_gray
+        binding.btnLogin.setTextColor(resources.getColor(colorTexto, null))
+        binding.btnRegistrate.setTextColor(resources.getColor(colorTexto, null))
+    }
+
+    // [Navegar a la pantalla principal]
     private fun navegarAHU2() {
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
