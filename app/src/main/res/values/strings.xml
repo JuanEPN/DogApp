@@ -21,4 +21,9 @@
     <string name="nueva_cita">Nueva Cita</string>
     <string name="turno">Turno</string>
     <string name="DetalleImgPerro">Imagen de la mascota</string>
+    <string name="login">Login</string>
+    <string name="registrate">Registrate</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="dogapp">DogApp</string>
 </resources>
