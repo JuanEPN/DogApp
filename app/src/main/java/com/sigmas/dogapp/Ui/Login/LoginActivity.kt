@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Login registrado correctamente", Toast.LENGTH_SHORT).show()
                         navegarAHU2()
                     } else {
                         Toast.makeText(this, "Error: este usuario ya existe o es inválido", Toast.LENGTH_LONG).show()
@@ -70,12 +70,8 @@ class LoginActivity : AppCompatActivity() {
 
     // [Validar email y password] (Formato, longitud mínima y campos llenos)
     private fun validarCampos(email: String, password: String): Boolean {
-        if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
-            return false
-        }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(this, "Correo electrónico inválido", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Email inválido", Toast.LENGTH_SHORT).show()
             return false
         }
         if (password.length < 6) {
