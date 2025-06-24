@@ -1,4 +1,4 @@
-package com.sigmas.dogapp.Ui.Login
+package com.sigmas.dogapp.ui.Login
 
 import android.content.Intent
 import android.os.Bundle
