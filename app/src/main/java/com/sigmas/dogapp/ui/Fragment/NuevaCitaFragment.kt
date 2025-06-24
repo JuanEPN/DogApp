@@ -1,22 +1,22 @@
-package com.sigmas.dogapp.ui.fragment
+package com.sigmas.dogapp.ui.Fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.sigmas.dogapp.databinding.FragmentListaCitasBinding
+import com.sigmas.dogapp.databinding.ActivityNewAppointmentBinding
 
-class ListaCitasFragment : Fragment() {
+class NuevaCitaFragment : Fragment() {
 
-    private var _binding: FragmentListaCitasBinding? = null
+    private var _binding: ActivityNewAppointmentBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentListaCitasBinding.inflate(inflater, container, false)
+        _binding = ActivityNewAppointmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 

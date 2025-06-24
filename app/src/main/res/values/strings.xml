@@ -5,11 +5,11 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">Welcome!</string>
     <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-    <string name="sintomas">"Sintomas"</string>
+    <string name="invalid_password">Password must be &gt;5 characters</string>
+    <string name="login_failed">Login failed</string>
+    <string name="sintomas">Síntomas</string>
     <string name="editar_cita">Editar Cita</string>
     <string name="desc_btn_back">Botón para volver</string>
     <string name="nombre_mascota">Nombre de la Mascota</string>
@@ -21,4 +21,7 @@
     <string name="nueva_cita">Nueva Cita</string>
     <string name="turno">Turno</string>
     <string name="DetalleImgPerro">Imagen de la mascota</string>
+    <string name="selecciona_sintoma">Selecciona un síntoma</string>
+    <string name="cita_guardada">Cita guardada</string>
+    <string name="error_cargar_razas">Error al cargar razas</string>
 </resources>

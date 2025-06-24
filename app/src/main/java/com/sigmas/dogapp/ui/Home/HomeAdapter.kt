@@ -1,4 +1,4 @@
-package com.sigmas.dogapp.Ui.Home
+package com.sigmas.dogapp.ui.Home
 
 import android.view.LayoutInflater
 import android.view.View

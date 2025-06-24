@@ -1,4 +1,4 @@
-package com.sigmas.dogapp.Ui.Home
+package com.sigmas.dogapp.ui.Home
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,10 +11,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sigmas.dogapp.R
 import com.sigmas.dogapp.Data.AppDatabase
 import com.sigmas.dogapp.Repository.CitaRepository
-import com.sigmas.dogapp.Ui.CitaDetail.CitaDetailActivity
-import com.sigmas.dogapp.Ui.Newappointment.NewAppointmentActivity
-import com.sigmas.dogapp.viewmodel.HomeViewModel
-import com.sigmas.dogapp.viewmodel.HomeViewModelFactory
+import com.sigmas.dogapp.ui.CitaDetail.CitaDetailActivity
+import com.sigmas.dogapp.ui.Newappointment.NewAppointmentActivity
+import com.sigmas.dogapp.ViewModel.HomeViewModel
+import com.sigmas.dogapp.ViewModel.HomeViewModelFactory
 
 class HomeActivity : AppCompatActivity() {
 
