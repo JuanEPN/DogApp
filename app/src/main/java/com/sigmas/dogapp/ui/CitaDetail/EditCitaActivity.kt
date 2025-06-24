@@ -42,7 +42,7 @@ class EditCitaActivity : AppCompatActivity() {
 
         // [Inicializar base de datos y repositorio] (Se conecta con Room vía DAO)
         val database = AppDatabase.getDatabase(applicationContext)
-        citaRepository = CitaRepository(database.citaDao())
+        citaRepository = CitaRepository()
 
         // [Obtener cita del intent] (Recoge la cita enviada desde otra actividad)
         citaActual = intent.getParcelableExtra("cita")

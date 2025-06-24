@@ -31,10 +31,7 @@ class HomeActivity : AppCompatActivity() {
         recyclerViewCitas = findViewById(R.id.recyclerViewCitas)
         fabAddCita = findViewById(R.id.fabAddCita)
 
-        // Inicializar ViewModel
-        val database = AppDatabase.getDatabase(applicationContext)
-        val repository = CitaRepository(database.citaDao())
-        val factory = HomeViewModelFactory(repository)
+        val factory = HomeViewModelFactory(CitaRepository())
         viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
         setupRecyclerView()
@@ -44,6 +41,7 @@ class HomeActivity : AppCompatActivity() {
             homeAdapter.updateList(citas)
         }
     }
+
 
     private fun setupRecyclerView() {
         homeAdapter = HomeAdapter(emptyList()) { cita ->

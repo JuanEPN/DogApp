@@ -65,15 +65,11 @@ class CitaDetailActivity : AppCompatActivity() {
         }
 
         // [Obtener ID de cita] (Verifica si el ID es válido, si no, cierra la actividad)
-        val idCita = intent.getIntExtra("id", -1)
-        if (idCita == -1) {
-            Toast.makeText(this, "Error: ID de cita inválido", Toast.LENGTH_SHORT).show()
-            finish()
-            return
-        }
+        val idCita = intent.getStringExtra("id") ?: ""
+
 
         // [Inicializar repositorio] (Accede a la base de datos de citas)
-        citaRepository = CitaRepository(AppDatabase.getDatabase(applicationContext).citaDao())
+        citaRepository = CitaRepository()
 
         // [Botón Volver] (Regresa al Home de citas)
         binding.btnBack.setOnClickListener {
@@ -96,7 +92,7 @@ class CitaDetailActivity : AppCompatActivity() {
 
     // [Cargar información de la cita] (Muestra los datos en pantalla y llama a la API de imagen)
     @SuppressLint("SetTextI18n")
-    private fun cargarDatosCita(idCita: Int) {
+    private fun cargarDatosCita(idCita: String) {
         lifecycleScope.launch {
             val cita = citaRepository.getCitaById(idCita)
             if (cita != null) {

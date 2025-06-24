@@ -38,8 +38,7 @@ class NewAppointmentActivity : AppCompatActivity() {
         binding = ActivityNewAppointmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val database = AppDatabase.getDatabase(applicationContext)
-        citaRepository = CitaRepository(database.citaDao())
+        citaRepository = CitaRepository()
 
         configurarDropdown()
         cargarRazasDesdeApi()
@@ -58,6 +57,7 @@ class NewAppointmentActivity : AppCompatActivity() {
             navegarAHome()
         }
     }
+
 
     private fun navegarAHome() {
         startActivity(Intent(this, HomeActivity::class.java))
