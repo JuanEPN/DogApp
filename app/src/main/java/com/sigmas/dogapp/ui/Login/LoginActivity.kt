@@ -1,4 +1,4 @@
-package com.sigmas.dogapp.Ui.Login
+package com.sigmas.dogapp.ui.Login
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.widget.addTextChangedListener
 import com.google.firebase.auth.FirebaseAuth
 import com.sigmas.dogapp.databinding.ActivityLoginBinding
-import com.sigmas.dogapp.Ui.Home.HomeActivity
+import com.sigmas.dogapp.ui.Home.HomeActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
 
         // [Deshabilitar botones inicialmente]
         binding.btnLogin.isEnabled = false
-        binding.btnRegistrate.isEnabled = false
+        binding.tvRegister.isEnabled = false
         actualizarColorBotones(false)
 
         // [Activar botones solo si los campos están llenos]
@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // [Registrar nuevo usuario]
-        binding.btnRegistrate.setOnClickListener {
+        binding.tvRegister.setOnClickListener {
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString()
 
@@ -90,7 +90,7 @@ class LoginActivity : AppCompatActivity() {
         val habilitar = emailLleno && passwordLleno
 
         binding.btnLogin.isEnabled = habilitar
-        binding.btnRegistrate.isEnabled = habilitar
+        binding.tvRegister.isEnabled = habilitar
         actualizarColorBotones(habilitar)
     }
 
@@ -98,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
     private fun actualizarColorBotones(habilitar: Boolean) {
         val colorTexto = if (habilitar) android.R.color.white else android.R.color.darker_gray
         binding.btnLogin.setTextColor(resources.getColor(colorTexto, null))
-        binding.btnRegistrate.setTextColor(resources.getColor(colorTexto, null))
+        binding.tvRegister.setTextColor(resources.getColor(colorTexto, null))
     }
 
     // [Navegar a la pantalla principal]

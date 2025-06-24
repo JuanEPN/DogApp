@@ -17,33 +17,37 @@
         android:theme="@style/Theme.DogApp"
         tools:targetApi="31">
 
-        <!-- Login  -->
+        <!-- SplashActivity como pantalla inicial -->
         <activity
-            android:name=".Ui.Login.LoginActivity"
+            android:name=".ui.Splash.SplashActivity"
             android:exported="true"
-            android:label="@string/title_activity_login"
-            android:theme="@style/Theme.DogApp">
+            android:theme="@style/Theme.DogApp"> <!-- usa tu tema directamente -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- Pantalla de inicio -->
+        <!-- LoginActivity (ya no es LAUNCHER) -->
         <activity
-            android:name=".Ui.Home.HomeActivity"
+            android:name=".ui.Login.LoginActivity"
+            android:exported="true"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.DogApp" />
+
+        <!-- Pantalla de inicio -->
+        <activity android:name=".ui.Home.HomeActivity"
             android:exported="false" />
 
         <!-- Pantalla para crear nuevas citas -->
-        <activity android:name=".Ui.Newappointment.NewAppointmentActivity" />
+        <activity android:name=".ui.Newappointment.NewAppointmentActivity" />
 
         <!-- Pantalla de detalle cita -->
-        <activity android:name=".Ui.CitaDetail.CitaDetailActivity" />
+        <activity android:name=".ui.CitaDetail.CitaDetailActivity" />
 
         <!-- Pantalla para editar citas -->
-        <activity android:name=".Ui.CitaDetail.EditCitaActivity" />
+        <activity android:name=".ui.CitaDetail.EditCitaActivity" />
 
     </application>
-
 
 </manifest>

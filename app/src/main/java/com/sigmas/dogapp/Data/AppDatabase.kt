@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.sigmas.dogapp.Data.Model.Cita
 
+
 @Database(entities = [Cita::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 

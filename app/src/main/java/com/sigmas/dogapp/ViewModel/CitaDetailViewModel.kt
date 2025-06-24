@@ -1,4 +1,4 @@
-package com.sigmas.dogapp.viewmodel
+package com.sigmas.dogapp.ViewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

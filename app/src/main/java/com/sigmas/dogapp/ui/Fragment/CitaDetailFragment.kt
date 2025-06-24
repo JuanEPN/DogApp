@@ -1,4 +1,4 @@
-package com.sigmas.dogapp.UI.Fragments
+package com.sigmas.dogapp.ui.Fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.sigmas.dogapp.Data.CitaDatabase
+import com.sigmas.dogapp.UI.Fragments.CitaDetailFragmentArgs
 import com.sigmas.dogapp.databinding.FragmentCitaDetailBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

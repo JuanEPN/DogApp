@@ -1,4 +1,4 @@
-package com.sigmas.dogapp.Ui.CitaDetail
+package com.sigmas.dogapp.ui.CitaDetail
 
 import android.R
 import android.content.Intent
@@ -16,7 +16,7 @@ import com.sigmas.dogapp.Data.Model.Cita
 import com.sigmas.dogapp.Data.Model.RazasResponse
 import com.sigmas.dogapp.Network.DogApiService
 import com.sigmas.dogapp.Network.RetrofitRazas
-import com.sigmas.dogapp.Ui.Home.HomeActivity
+import com.sigmas.dogapp.ui.Home.HomeActivity
 import com.sigmas.dogapp.Repository.CitaRepository
 import kotlinx.coroutines.launch
 import retrofit2.Call

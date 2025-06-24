@@ -21,9 +21,7 @@
     <string name="nueva_cita">Nueva Cita</string>
     <string name="turno">Turno</string>
     <string name="DetalleImgPerro">Imagen de la mascota</string>
-    <string name="login">Login</string>
-    <string name="registrate">Registrate</string>
-    <string name="password">Password</string>
-    <string name="email">Email</string>
-    <string name="dogapp">DogApp</string>
+    <string name="selecciona_sintoma">Selecciona un síntoma</string>
+    <string name="cita_guardada">La cita se guardó correctamente</string>
+    <string name="error_cargar_razas">No se pudo cargar la lista de razas</string>
 </resources>

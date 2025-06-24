@@ -1,4 +1,4 @@
-package com.sigmas.dogapp.ui.fragment
+package com.sigmas.dogapp.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
