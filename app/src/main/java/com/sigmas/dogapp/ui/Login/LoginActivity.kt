@@ -1,110 +1,110 @@
-package com.sigmas.dogapp.ui.Login
+package com.sigmas.dogapp.Ui.Login
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.widget.*
-import androidx.appcompat.app.AlertDialog
+import android.util.Patterns
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.widget.addTextChangedListener
 import com.google.firebase.auth.FirebaseAuth
-import com.sigmas.dogapp.R
+import com.sigmas.dogapp.databinding.ActivityLoginBinding
 import com.sigmas.dogapp.ui.Home.HomeActivity
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var etEmail: EditText
-    private lateinit var etPassword: EditText
-    private lateinit var btnLogin: Button
-    private lateinit var tvRegister: TextView
-
-    private lateinit var auth: FirebaseAuth
-
+    // [Variables principales] (Binding y Firebase Auth)
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        // Inicializar Firebase Auth
-        auth = FirebaseAuth.getInstance()
+        firebaseAuth = FirebaseAuth.getInstance()
 
-        // Referencias
-        etEmail = findViewById(R.id.etEmail)
-        etPassword = findViewById(R.id.etPassword)
-        btnLogin = findViewById(R.id.btnLogin)
-        tvRegister = findViewById(R.id.tvRegister)
+        // [Deshabilitar botones inicialmente]
+        binding.btnLogin.isEnabled = false
+        binding.tvRegister.isEnabled = false
+        actualizarColorBotones(false)
 
-        btnLogin.isEnabled = false
-        tvRegister.isEnabled = false
+        // [Activar botones solo si los campos están llenos]
+        binding.etEmail.addTextChangedListener { validarBotones() }
+        binding.etPassword.addTextChangedListener { validarBotones() }
 
-        // Validación en tiempo real
-        val textWatcher = object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                val camposLlenos = etEmail.text.isNotBlank() && etPassword.text.isNotBlank()
-                btnLogin.isEnabled = camposLlenos
-                tvRegister.isEnabled = camposLlenos
-            }
+        // [Login existente]
+        binding.btnLogin.setOnClickListener {
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString()
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        }
+            if (!validarCampos(email, password)) return@setOnClickListener
 
-        etEmail.addTextChangedListener(textWatcher)
-        etPassword.addTextChangedListener(textWatcher)
-
-        // Login
-        btnLogin.setOnClickListener {
-            val email = etEmail.text.toString().trim()
-            val password = etPassword.text.toString().trim()
-
-            if (password.length != 6 || !password.all { it.isDigit() }) {
-                mostrarDialogo("Error", "La contraseña debe tener exactamente 6 números.")
-                return@setOnClickListener
-            }
-
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener {
-                    navegarAHU2()
-                }
-                .addOnFailureListener {
-                    mostrarDialogo("Login incorrecto", "Email o contraseña inválidos.")
-                }
-        }
-
-        // Registro
-        tvRegister.setOnClickListener {
-            val email = etEmail.text.toString().trim()
-            val password = etPassword.text.toString().trim()
-
-            if (password.length != 6 || !password.all { it.isDigit() }) {
-                mostrarDialogo("Error", "La contraseña debe tener exactamente 6 números.")
-                return@setOnClickListener
-            }
-
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnSuccessListener {
-                    navegarAHU2()
-                }
-                .addOnFailureListener { e ->
-                    if (e.message?.contains("already") == true || e.message?.contains("email address") == true) {
-                        mostrarDialogo("Usuario ya registrado", "Ya existe una cuenta con este correo.")
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        navegarAHU2()
                     } else {
-                        mostrarDialogo("Error en el registro", e.message ?: "Error desconocido.")
+                        Toast.makeText(this, "Login Incorrecto", Toast.LENGTH_SHORT).show()
+                    }
+                }
+        }
+
+        // [Registrar nuevo usuario]
+        binding.tvRegister.setOnClickListener {
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString()
+
+            if (!validarCampos(email, password)) return@setOnClickListener
+
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(this, "Login registrado correctamente", Toast.LENGTH_SHORT).show()
+                        navegarAHU2()
+                    } else {
+                        Toast.makeText(this, "Error: este usuario ya existe o es inválido", Toast.LENGTH_LONG).show()
                     }
                 }
         }
     }
 
-    private fun navegarAHU2() {
-        startActivity(Intent(this, HomeActivity::class.java))
-        finish()
+    // [Validar email y password] (Formato, longitud mínima y campos llenos)
+    private fun validarCampos(email: String, password: String): Boolean {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Email inválido", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (password.length < 6) {
+            Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
     }
 
-    private fun mostrarDialogo(titulo: String, mensaje: String) {
-        AlertDialog.Builder(this)
-            .setTitle(titulo)
-            .setMessage(mensaje)
-            .setPositiveButton("Aceptar", null)
-            .show()
+    // [Activar botones si los campos están llenos]
+    private fun validarBotones() {
+        val emailLleno = binding.etEmail.text?.isNotEmpty() == true
+        val passwordLleno = binding.etPassword.text?.isNotEmpty() == true
+        val habilitar = emailLleno && passwordLleno
+
+        binding.btnLogin.isEnabled = habilitar
+        binding.tvRegister.isEnabled = habilitar
+        actualizarColorBotones(habilitar)
+    }
+
+    // [Actualizar estilo visual de los botones]
+    private fun actualizarColorBotones(habilitar: Boolean) {
+        val colorTexto = if (habilitar) android.R.color.white else android.R.color.darker_gray
+        binding.btnLogin.setTextColor(resources.getColor(colorTexto, null))
+        binding.tvRegister.setTextColor(resources.getColor(colorTexto, null))
+    }
+
+    // [Navegar a la pantalla principal]
+    private fun navegarAHU2() {
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
