@@ -13,9 +13,9 @@ class CitaDetailViewModel(private val repository: CitaRepository) : ViewModel() 
     private val _cita = MutableLiveData<Cita?>()
     val cita: LiveData<Cita?> get() = _cita
 
-    fun loadCitaById(id: Int) {
+    fun loadCitaById(id: String) {
         viewModelScope.launch {
-            val result = repository.getCitaById(id) // esta función es suspend
+            val result = repository.getCitaById(id)
             _cita.postValue(result)
         }
     }
