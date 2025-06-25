@@ -10,19 +10,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sigmas.dogapp.ViewModel.HomeViewModel
 import com.sigmas.dogapp.databinding.FragmentHomeBinding
 import com.sigmas.dogapp.ui.Home.HomeAdapter
-import com.sigmas.dogapp.ViewModel.HomeViewModelFactory
-import com.sigmas.dogapp.Repository.CitaRepository
+import dagger.hilt.android.AndroidEntryPoint
 
 
-
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: HomeViewModel by viewModels {
-        HomeViewModelFactory(CitaRepository())
-    }
+    private val viewModel: HomeViewModel by viewModels()
+
 
     private lateinit var adapter: HomeAdapter
 

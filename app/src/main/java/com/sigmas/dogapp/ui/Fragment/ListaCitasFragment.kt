@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.sigmas.dogapp.databinding.FragmentListaCitasBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ListaCitasFragment : Fragment() {
 
     private var _binding: FragmentListaCitasBinding? = null

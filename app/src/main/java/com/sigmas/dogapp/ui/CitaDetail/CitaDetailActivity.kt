@@ -13,24 +13,27 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.sigmas.dogapp.R
 import com.sigmas.dogapp.databinding.FragmentCitaDetailBinding
-import com.sigmas.dogapp.Data.AppDatabase
 import com.sigmas.dogapp.Data.Model.Cita
 import com.sigmas.dogapp.Data.Model.ImagenRazaResponse
 import com.sigmas.dogapp.Network.DogApiService
-import com.sigmas.dogapp.Network.RetrofitRazas
 import com.sigmas.dogapp.ui.Home.HomeActivity
 import com.sigmas.dogapp.Repository.CitaRepository
+import com.sigmas.dogapp.network.RetrofitRazas
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class CitaDetailActivity : AppCompatActivity() {
 
     // [Variables principales] (Binding, repositorio de citas y la cita actual)
     private lateinit var binding: FragmentCitaDetailBinding
-    private lateinit var citaRepository: CitaRepository
     private var citaActual: Cita? = null
+    @Inject
+    lateinit var citaRepository: CitaRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // [Desactivar modo oscuro] (Fuerza modo claro para evitar problemas de visibilidad)
@@ -67,9 +70,6 @@ class CitaDetailActivity : AppCompatActivity() {
         // [Obtener ID de cita] (Verifica si el ID es válido, si no, cierra la actividad)
         val idCita = intent.getStringExtra("id") ?: ""
 
-
-        // [Inicializar repositorio] (Accede a la base de datos de citas)
-        citaRepository = CitaRepository()
 
         // [Botón Volver] (Regresa al Home de citas)
         binding.btnBack.setOnClickListener {

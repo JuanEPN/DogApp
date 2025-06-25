@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.sigmas.dogapp.Data.CitaDatabase
 import com.sigmas.dogapp.UI.Fragments.CitaDetailFragmentArgs
+import com.sigmas.dogapp.ViewModel.CitaDetailViewModel
 import com.sigmas.dogapp.databinding.FragmentCitaDetailBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-
+import dagger.hilt.android.AndroidEntryPoint
+@AndroidEntryPoint
 class CitaDetailFragment : Fragment() {
+
+    private val viewModel: CitaDetailViewModel by viewModels()
 
     private var _binding: FragmentCitaDetailBinding? = null
     private val binding get() = _binding!!
@@ -32,22 +32,13 @@ class CitaDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dao = CitaDatabase.getDatabase(requireContext()).citaDao()
-        val citaId = args.citaId
+        val citaId = args.citaId.toString()
+        viewModel.loadCitaById(citaId)
 
-        lifecycleScope.launch {
-            val cita = withContext(Dispatchers.IO) {
-                dao.getAppointmentId(citaId)
-            }
-
+        viewModel.cita.observe(viewLifecycleOwner) { cita ->
             cita?.let {
                 binding.TituloNombreMascota.text = it.nombreMascota
                 binding.DetalleTurno.text = "Turno: ${it.turno}"
-                // Agregá más si los tenés definidos en el layout:
-                // binding.TvRaza.text = it.raza
-                // binding.TvSintomas.text = it.sintomas ?: "Sin síntomas"
-                // binding.TvNombrePropietario.text = it.nombrePropietario
-                // binding.TvTelefono.text = it.telefono
             }
         }
     }

@@ -7,7 +7,9 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.sigmas.dogapp.R
 import com.sigmas.dogapp.ui.Login.LoginActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

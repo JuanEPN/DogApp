@@ -6,10 +6,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.sigmas.dogapp.Data.Model.Cita
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
-class CitaRepository {
+class CitaRepository @Inject constructor( private val db: FirebaseFirestore) {
 
-    private val db = FirebaseFirestore.getInstance()
     private val citasLiveData = MutableLiveData<List<Cita>>()
 
     fun getAllCitas(): LiveData<List<Cita>> {
