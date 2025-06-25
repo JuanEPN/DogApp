@@ -10,7 +10,7 @@ import com.sigmas.dogapp.R
 import com.sigmas.dogapp.Data.Model.Cita
 import com.sigmas.dogapp.Data.Model.ImagenRazaResponse
 import com.sigmas.dogapp.Network.DogApiService
-import com.sigmas.dogapp.Network.RetrofitRazas
+import com.sigmas.dogapp.network.RetrofitRazas
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
 import retrofit2.Callback

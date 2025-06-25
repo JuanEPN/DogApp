@@ -2,6 +2,7 @@ package com.sigmas.dogapp.ui.Home
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
@@ -14,14 +15,15 @@ import com.sigmas.dogapp.Repository.CitaRepository
 import com.sigmas.dogapp.ui.CitaDetail.CitaDetailActivity
 import com.sigmas.dogapp.ui.Newappointment.NewAppointmentActivity
 import com.sigmas.dogapp.ViewModel.HomeViewModel
-import com.sigmas.dogapp.ViewModel.HomeViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var homeAdapter: HomeAdapter
     private lateinit var recyclerViewCitas: RecyclerView
     private lateinit var fabAddCita: FloatingActionButton
-    private lateinit var viewModel: HomeViewModel
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -30,9 +32,6 @@ class HomeActivity : AppCompatActivity() {
 
         recyclerViewCitas = findViewById(R.id.recyclerViewCitas)
         fabAddCita = findViewById(R.id.fabAddCita)
-
-        val factory = HomeViewModelFactory(CitaRepository())
-        viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
         setupRecyclerView()
         setupFab()

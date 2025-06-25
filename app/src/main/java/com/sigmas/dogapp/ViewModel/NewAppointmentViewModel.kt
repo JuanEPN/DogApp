@@ -7,20 +7,25 @@ import androidx.lifecycle.viewModelScope
 import com.sigmas.dogapp.Data.Model.Cita
 import com.sigmas.dogapp.Data.Model.RazasResponse
 import com.sigmas.dogapp.Network.DogApiService
-import com.sigmas.dogapp.Network.RetrofitRazas
 import com.sigmas.dogapp.Repository.CitaRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class NewAppointmentViewModel(private val repository: CitaRepository) : ViewModel() {
+@HiltViewModel
+class NewAppointmentViewModel @Inject constructor(private val repository: CitaRepository, private val dogApiService: DogApiService) : ViewModel() {
 
     private val _razas = MutableLiveData<List<String>>()
     val razas: LiveData<List<String>> = _razas
 
     private val _citaGuardada = MutableLiveData<Boolean>()
     val citaGuardada: LiveData<Boolean> = _citaGuardada
+
+    private val _imagenRaza = MutableLiveData<String>()
+    val imagenRaza: LiveData<String> = _imagenRaza
 
     fun guardarCita(cita: Cita) {
         viewModelScope.launch {
@@ -34,8 +39,7 @@ class NewAppointmentViewModel(private val repository: CitaRepository) : ViewMode
     }
 
     fun cargarRazasDesdeApi() {
-        val api = RetrofitRazas.instance.create(DogApiService::class.java)
-        api.obtenerTodasLasRazas().enqueue(object : Callback<RazasResponse> {
+        dogApiService.obtenerTodasLasRazas().enqueue(object : Callback<RazasResponse> {
             override fun onResponse(call: Call<RazasResponse>, response: Response<RazasResponse>) {
                 if (response.isSuccessful) {
                     val razasMap = response.body()?.message ?: emptyMap()
@@ -52,4 +56,6 @@ class NewAppointmentViewModel(private val repository: CitaRepository) : ViewMode
             }
         })
     }
+
+
 }

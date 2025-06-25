@@ -15,21 +15,25 @@ import com.sigmas.dogapp.Data.AppDatabase
 import com.sigmas.dogapp.Data.Model.Cita
 import com.sigmas.dogapp.Data.Model.RazasResponse
 import com.sigmas.dogapp.Network.DogApiService
-import com.sigmas.dogapp.Network.RetrofitRazas
 import com.sigmas.dogapp.ui.Home.HomeActivity
 import com.sigmas.dogapp.Repository.CitaRepository
+import com.sigmas.dogapp.network.RetrofitRazas
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
+@AndroidEntryPoint
 @Suppress("DEPRECATION")
 class EditCitaActivity : AppCompatActivity() {
 
     // [Variables principales] (Binding, repositorio y cita actual a editar)
     private lateinit var binding: FragmentEditarCitaBinding
-    private lateinit var citaRepository: CitaRepository
     private var citaActual: Cita? = null
+    @Inject
+    lateinit var citaRepository: CitaRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // [Forzar modo claro] (Desactiva modo oscuro para mantener diseño consistente)
@@ -42,7 +46,6 @@ class EditCitaActivity : AppCompatActivity() {
 
         // [Inicializar base de datos y repositorio] (Se conecta con Room vía DAO)
         val database = AppDatabase.getDatabase(applicationContext)
-        citaRepository = CitaRepository()
 
         // [Obtener cita del intent] (Recoge la cita enviada desde otra actividad)
         citaActual = intent.getParcelableExtra("cita")

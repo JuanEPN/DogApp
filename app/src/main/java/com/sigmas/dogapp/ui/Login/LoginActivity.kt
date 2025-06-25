@@ -10,20 +10,24 @@ import androidx.core.widget.addTextChangedListener
 import com.google.firebase.auth.FirebaseAuth
 import com.sigmas.dogapp.databinding.ActivityLoginBinding
 import com.sigmas.dogapp.ui.Home.HomeActivity
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+import com.sigmas.dogapp.di.FirebaseModule
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
     // [Variables principales] (Binding y Firebase Auth)
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        firebaseAuth = FirebaseAuth.getInstance()
 
         // [Deshabilitar botones inicialmente]
         binding.btnLogin.isEnabled = false

@@ -13,23 +13,26 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.sigmas.dogapp.R
-import com.sigmas.dogapp.Data.AppDatabase
 import com.sigmas.dogapp.Data.Model.Cita
 import com.sigmas.dogapp.Data.Model.RazasResponse
 import com.sigmas.dogapp.databinding.ActivityNewAppointmentBinding
 import com.sigmas.dogapp.Network.DogApiService
-import com.sigmas.dogapp.Network.RetrofitRazas
 import com.sigmas.dogapp.Repository.CitaRepository
+import com.sigmas.dogapp.network.RetrofitRazas
 import com.sigmas.dogapp.ui.Home.HomeActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class NewAppointmentActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNewAppointmentBinding
-    private lateinit var citaRepository: CitaRepository
+    @Inject
+    lateinit var citaRepository: CitaRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -38,7 +41,6 @@ class NewAppointmentActivity : AppCompatActivity() {
         binding = ActivityNewAppointmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        citaRepository = CitaRepository()
 
         configurarDropdown()
         cargarRazasDesdeApi()
