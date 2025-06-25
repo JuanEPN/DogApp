@@ -11,7 +11,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CitaDetailViewModel @Inject constructor(private val repository: CitaRepository) : ViewModel() {
+class CitaDetailViewModel @Inject constructor(
+    private val repository: CitaRepository) : ViewModel() {
 
     private val _cita = MutableLiveData<Cita?>()
     val cita: LiveData<Cita?> get() = _cita
